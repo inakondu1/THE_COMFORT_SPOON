@@ -1,257 +1,325 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>The Comfort Spoon</title>
+    <title>The Comfort Spoon | Delicious Meals & Warm Moments</title>
 
     <link rel="stylesheet" href="/static/css/style.css">
-
 </head>
 
 <body>
 
 <header class="navbar">
 
-<div class="logo">
-    <span>The Comfort</span> Spoon
-</div>
+    <div class="logo">
+        <span>The Comfort</span> Spoon
+    </div>
 
-<nav>
+    <nav>
 
-    <a href="/">HOME</a>
+        <a href="/">HOME</a>
 
-    <a href="/shop">MENU</a>
+        <a href="/shop">MENU</a>
 
-    <a href="/cart">CART 🛒</a>
+        <a href="/cart">CART 🛒</a>
 
-    {{if .LoggedIn}}
+        {{if .LoggedIn}}
 
-        <a href="/customer">MY ACCOUNT</a>
+            <a href="/customer">MY ACCOUNT</a>
 
-        <a href="/order-history">ORDER HISTORY</a>
+            <a href="/order-history">ORDER HISTORY</a>
 
-        <a href="/logout">LOGOUT</a>
+            <a href="/logout">LOGOUT</a>
 
-    {{else}}
+        {{else}}
 
-        <a href="/register">REGISTER</a>
+            <a href="/register">REGISTER</a>
 
-        <a href="/login">LOGIN</a>
+            <a href="/login">LOGIN</a>
 
-    {{end}}
+        {{end}}
 
-</nav>
+    </nav>
 
 </header>
+
 
 <!-- HERO -->
 
 <section class="hero">
 
-<div class="hero-content">
+    <div class="hero-content">
 
-    {{if .LoggedIn}}
+        {{if .LoggedIn}}
 
-    <p class="hero-small">
-        WELCOME BACK, {{.CustomerName}}
-    </p>
+        <p class="hero-small">
+            WELCOME BACK, {{.CustomerName}}
+        </p>
 
-    {{else}}
+        {{else}}
 
-    <p class="hero-small">
-        WELCOME TO
-    </p>
+        <p class="hero-small">
+            WELCOME TO THE COMFORT SPOON
+        </p>
 
-    {{end}}
+        {{end}}
 
-    <h1>
-        THE COMFORT <span>SPOON</span>
-    </h1>
+        <h1>
+            GOOD FOOD.<br>
+            <span>GREAT COMFORT.</span>
+        </h1>
 
-    <p>
-        Delicious meals, warm moments and
-        flavours you'll love.
-        Good food made with care and served with comfort.
-    </p>
+        <p class="hero-description">
+            Delicious meals prepared with care,
+            served with warmth and made for moments
+            worth remembering.
+        </p>
 
-    <a href="/shop"
-       class="order-button"
-       style="text-decoration:none; display:inline-block;">
+        <div class="hero-actions">
 
-        VIEW OUR MENU
+            <a href="/shop" class="hero-button">
+                VIEW OUR MENU
+            </a>
 
-    </a>
+            <a href="/cart" class="hero-secondary-button">
+                VIEW CART
+            </a>
 
-</div>
+        </div>
+
+    </div>
+
+    <div class="hero-scroll">
+        <span></span>
+        SCROLL TO DISCOVER
+    </div>
 
 </section>
+
 
 <!-- ABOUT -->
 
-<section class="shop-header">
+<section class="home-about">
 
-<p>THE COMFORT SPOON</p>
+    <div class="about-content">
 
-<h1>
-    GREAT TASTE • QUALITY • COMFORT
-</h1>
+        <p class="section-label">
+            THE COMFORT SPOON
+        </p>
 
-<span>
-    Enjoy delicious meals prepared with care for every occasion.
-</span>
+        <h2>
+            A TASTE OF <span>COMFORT</span>
+        </h2>
+
+        <p class="about-text">
+            At The Comfort Spoon, we believe good food should do
+            more than satisfy your hunger. It should create warmth,
+            bring people together and leave you looking forward
+            to your next meal.
+        </p>
+
+        <p class="about-text">
+            Every meal is prepared with care, using quality
+            ingredients and flavours inspired by the joy of
+            good home cooking.
+        </p>
+
+        <a href="/shop" class="text-button">
+            EXPLORE OUR MENU →
+        </a>
+
+    </div>
 
 </section>
+
 
 <!-- FEATURES -->
 
-<section style="max-width:1000px; margin:40px auto; padding:20px;">
+<section class="home-features">
 
-<div class="products">
+    <div class="section-heading">
 
-    <div class="product-card">
+        <p class="section-label">
+            WHY CHOOSE US
+        </p>
 
-        <div class="product-info">
+        <h2>
+            MADE WITH CARE.<br>
+            <span>SERVED WITH LOVE.</span>
+        </h2>
 
-            <h2>
-                DELICIOUS MEALS
-            </h2>
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-number">
+                01
+            </div>
+
+            <h3>
+                FRESH INGREDIENTS
+            </h3>
 
             <p>
-                Enjoy carefully prepared meals made with
-                quality ingredients and flavours you'll want
-                to come back for.
+                We believe great meals begin with quality.
+                Our food is prepared with carefully selected
+                ingredients for delicious flavour in every bite.
             </p>
 
         </div>
 
-    </div>
 
-    <div class="product-card">
+        <div class="feature-card">
 
-        <div class="product-info">
+            <div class="feature-number">
+                02
+            </div>
 
-            <h2>
+            <h3>
+                MADE WITH CARE
+            </h3>
+
+            <p>
+                From preparation to presentation, every meal
+                receives the attention it deserves because
+                comfort is found in the little details.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-number">
+                03
+            </div>
+
+            <h3>
                 EASY ORDERING
-            </h2>
+            </h3>
 
             <p>
-                Browse our menu, choose your favourite meals,
-                add them to your cart and place your order
-                with ease.
+                Browse our menu, choose your favourites and
+                place your order easily from wherever you are.
             </p>
 
         </div>
 
     </div>
 
-    <div class="product-card">
+</section>
 
-        <div class="product-info">
 
-            <h2>
-                CONVENIENT PAYMENT
-            </h2>
+<!-- CTA -->
 
-            <p>
-                Make your payment conveniently and keep track
-                of your orders and payment history from your
-                account.
-            </p>
+<section class="home-cta">
 
-        </div>
+    <div class="cta-content">
+
+        <p class="section-label">
+            SOMETHING DELICIOUS AWAITS
+        </p>
+
+        <h2>
+            READY FOR YOUR<br>
+            <span>NEXT FAVOURITE MEAL?</span>
+        </h2>
+
+        <p>
+            Discover something delicious from The Comfort Spoon.
+        </p>
+
+        <a href="/shop" class="hero-button">
+            EXPLORE OUR MENU
+        </a>
 
     </div>
 
-</div>
-
 </section>
 
-<!-- CALL TO ACTION -->
-
-<section class="shop-header">
-
-<p>
-    HUNGRY?
-</p>
-
-<h1>
-    FIND SOMETHING DELICIOUS
-</h1>
-
-<a href="/shop"
-   class="order-button"
-   style="text-decoration:none; display:inline-block;">
-
-    EXPLORE OUR MENU
-
-</a>
-
-</section>
 
 <!-- FOOTER -->
 
 <footer>
 
-<div class="footer-logo">
-    The Comfort <span>Spoon</span>
-</div>
+    <div class="footer-main">
 
-<p>
-    Delicious Meals • Great Taste • Warm Moments
-</p>
+        <div class="footer-brand">
 
-<div class="social-footer">
+            <div class="footer-logo">
+                The Comfort <span>Spoon</span>
+            </div>
 
-    <h3>CONNECT WITH US</h3>
+            <p>
+                Delicious meals. Great taste.
+                Warm moments.
+            </p>
 
-    <p class="social-intro">
-        Follow <strong>The Comfort Spoon</strong> for new meals,
-        special offers, updates and more.
-    </p>
+        </div>
 
-    <div class="social-links">
 
-        <a href="#" aria-label="Facebook">
-            <span>f</span>
-            <strong>Facebook</strong>
-            <small>@TheComfortSpoon</small>
-        </a>
+        <div class="footer-column">
 
-        <a href="#" aria-label="Instagram">
-            <span>◎</span>
-            <strong>Instagram</strong>
-            <small>@TheComfortSpoon</small>
-        </a>
+            <h3>EXPLORE</h3>
 
-        <a href="#" aria-label="TikTok">
-            <span>♪</span>
-            <strong>TikTok</strong>
-            <small>@TheComfortSpoon</small>
-        </a>
+            <a href="/">Home</a>
+            <a href="/shop">Menu</a>
+            <a href="/cart">Cart</a>
 
-        <a href="#" aria-label="X">
-            <span>𝕏</span>
-            <strong>X</strong>
-            <small>@TheComfortSpoon</small>
-        </a>
+        </div>
 
-        <a href="#" aria-label="WhatsApp">
-            <span>◉</span>
-            <strong>WhatsApp</strong>
-            <small>Coming soon</small>
-        </a>
+
+        <div class="footer-column">
+
+            <h3>ACCOUNT</h3>
+
+            {{if .LoggedIn}}
+
+                <a href="/customer">My Account</a>
+                <a href="/order-history">Order History</a>
+                <a href="/logout">Logout</a>
+
+            {{else}}
+
+                <a href="/register">Register</a>
+                <a href="/login">Login</a>
+
+            {{end}}
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>CONNECT</h3>
+
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">TikTok</a>
+            <a href="#">WhatsApp</a>
+
+        </div>
 
     </div>
 
-</div>
 
-<p>
-    © 2026 The Comfort Spoon
-</p>
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 The Comfort Spoon
+        </p>
+
+        <p>
+            GOOD FOOD • GREAT TASTE • WARM MOMENTS
+        </p>
+
+    </div>
 
 </footer>
 
