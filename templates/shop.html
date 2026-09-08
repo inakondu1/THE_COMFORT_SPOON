@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>ASEBE FABRICS | Shop</title>
+    <title>The Comfort Spoon | Menu</title>
 
     <link rel="stylesheet"
           href="/static/css/style.css">
@@ -20,29 +20,39 @@
 <header class="navbar">
 
     <div class="logo">
-        <span>ASEBE</span> FABRICS
+        <span>The Comfort</span> Spoon
     </div>
 
     <nav>
+
         <a href="/">HOME</a>
-        <a href="/shop">SHOP</a>
-        <a href="/cart">CART 🛒 <span id="cart-count">(0)</span></a>
+
+        <a href="/shop">MENU</a>
+
+        <a href="/cart">
+            CART 🛒 <span id="cart-count">(0)</span>
+        </a>
+
         <a href="/order">ORDER</a>
+
         <a href="/payment">PAYMENT</a>
-        <a href="/fabric-request">REQUEST FABRIC 🧵</a>
 
         {{if .LoggedIn}}
 
             <a href="/customer">MY ACCOUNT</a>
+
             <a href="/order-history">ORDER HISTORY</a>
+
             <a href="/logout">LOGOUT</a>
 
         {{else}}
 
             <a href="/register">REGISTER</a>
+
             <a href="/login">LOGIN</a>
 
         {{end}}
+
     </nav>
 
 </header>
@@ -50,28 +60,34 @@
 
 <section class="shop-header">
 
-    <p>ASEBE FABRICS</p>
+    <p>THE COMFORT SPOON</p>
 
-    <h1>OUR FABRICS</h1>
+    <h1>OUR MENU</h1>
 
     <span>
-        Discover beautiful fabrics for every occasion.
+        Discover delicious meals prepared with care,
+        quality ingredients and great taste.
     </span>
 
     {{if .IsAdmin}}
+
     <div style="margin-top: 20px;">
+
         <a href="/admin" class="back-button">
             ← BACK TO ADMIN DASHBOARD
         </a>
+
     </div>
+
     {{end}}
 
 </section>
 
 
-<section class="new-arrivals" style="text-align:center;margin:40px 0;">
+<section class="new-arrivals"
+         style="text-align:center;margin:40px 0;">
 
-    <h2>NEW ARRIVALS</h2>
+    <h2>NEW ON THE MENU</h2>
 
     <div class="products">
 
@@ -80,18 +96,38 @@
         <div class="product-card">
 
             {{if .Image}}
-                <img src="{{.Image}}" alt="{{.Name}}">
+
+                <img
+                    src="{{.Image}}"
+                    alt="{{.Name}}">
+
             {{else}}
+
                 <div class="no-image">
-                    <span>🧵</span>
-                    <p>Fabric Image</p>
+
+                    <span>🍽️</span>
+
+                    <p>Meal Image</p>
+
                 </div>
+
             {{end}}
 
+
             <div class="product-info">
-                <h2>{{.Name}}</h2>
-                <p>{{.Description}}</p>
-                <div class="fabric-price">₦{{printf "%.0f" .Price}}</div>
+
+                <h2>
+                    {{.Name}}
+                </h2>
+
+                <p>
+                    {{.Description}}
+                </p>
+
+                <div class="fabric-price">
+                    ₦{{printf "%.0f" .Price}}
+                </div>
+
 
                 {{if gt .Quantity 0}}
 
@@ -111,7 +147,7 @@
                         class="order-button"
                         disabled>
 
-                        OUT OF STOCK
+                        CURRENTLY UNAVAILABLE
 
                     </button>
 
@@ -127,20 +163,24 @@
 
 </section>
 
-<section class="fabric-search" style="text-align:center;margin:30px 0;">
+
+<section class="fabric-search"
+         style="text-align:center;margin:30px 0;">
 
     <form method="GET" action="/shop">
 
         <input
             type="text"
             name="search"
-            placeholder="Search fabrics..."
+            placeholder="Search our menu..."
             style="padding:12px;width:280px;border-radius:8px;border:1px solid #ccc;">
 
         <button
             type="submit"
             style="padding:12px 20px;background:#b30000;color:white;border:none;border-radius:8px;cursor:pointer;">
+
             🔍 SEARCH
+
         </button>
 
     </form>
@@ -156,8 +196,6 @@
 
         <div class="product-card">
 
-            <!-- FABRIC IMAGE -->
-
             {{if .Image}}
 
                 <img
@@ -168,16 +206,14 @@
 
                 <div class="no-image">
 
-                    <span>🧵</span>
+                    <span>🍽️</span>
 
-                    <p>Fabric Image</p>
+                    <p>Meal Image</p>
 
                 </div>
 
             {{end}}
 
-
-            <!-- FABRIC INFORMATION -->
 
             <div class="product-info">
 
@@ -185,11 +221,9 @@
                     {{.Name}}
                 </h2>
 
-
                 <p>
                     {{.Description}}
                 </p>
-
 
                 <div class="fabric-price">
                     ₦{{printf "%.0f" .Price}}
@@ -201,13 +235,13 @@
                     {{if gt .Quantity 0}}
 
                         <span class="available">
-                            ● In Stock
+                            ● Available
                         </span>
 
                     {{else}}
 
                         <span class="sold-out">
-                            ● Out of Stock
+                            ● Currently Unavailable
                         </span>
 
                     {{end}}
@@ -233,7 +267,7 @@
                         class="order-button"
                         disabled>
 
-                        OUT OF STOCK
+                        CURRENTLY UNAVAILABLE
 
                     </button>
 
@@ -250,12 +284,12 @@
         <div class="empty-shop">
 
             <h2>
-                No fabrics available yet.
+                No meals available yet.
             </h2>
 
             <p>
-                New fabrics will appear here
-                when they are added.
+                Delicious meals will appear here
+                when they are added to our menu.
             </p>
 
         </div>
@@ -268,15 +302,15 @@
 <footer>
 
     <div class="footer-logo">
-        ASEBE <span>FABRICS</span>
+        The Comfort <span>Spoon</span>
     </div>
 
     <p>
-        Quality Fabrics • Beautiful Designs • Great Prices
+        Delicious Meals • Great Taste • Warm Moments
     </p>
 
     <p>
-        © 2026 ASEBE FABRICS
+        © 2026 The Comfort Spoon
     </p>
 
 </footer>
@@ -366,81 +400,87 @@ document
 
     });
 
-    function updateCartCount() {
 
-        const cart =
-            JSON.parse(
-                localStorage.getItem(
-                    "asebeCart"
-                )
-            ) || [];
+function updateCartCount() {
 
-        const count =
-            cart.reduce(
-                function(total, item) {
-                    return total + (item.quantity || 0);
-                },
-                0
-            );
+    const cart =
+        JSON.parse(
+            localStorage.getItem(
+                "asebeCart"
+            )
+        ) || [];
 
-        const cartCount =
-            document.getElementById(
-                "cart-count"
-            );
-
-        if (cartCount) {
-
-            cartCount.textContent =
-                "(" + count + ")";
-
-        }
-    }
-
-    function showCartNotification(message) {
-
-        let notification =
-            document.getElementById(
-                "cart-notification"
-            );
-
-        if (!notification) {
-
-            notification =
-                document.createElement("div");
-
-            notification.id =
-                "cart-notification";
-
-            document.body.appendChild(
-                notification
-            );
-        }
-
-        notification.textContent =
-            "✓ " + message;
-
-        notification.classList.add(
-            "show"
+    const count =
+        cart.reduce(
+            function(total, item) {
+                return total + (item.quantity || 0);
+            },
+            0
         );
 
-        clearTimeout(
-            notification.hideTimer
+    const cartCount =
+        document.getElementById(
+            "cart-count"
         );
 
-        notification.hideTimer =
-            setTimeout(
-                function() {
+    if (cartCount) {
 
-                    notification.classList.remove(
-                        "show"
-                    );
+        cartCount.textContent =
+            "(" + count + ")";
 
-                },
-                2500
-            );
     }
 
-    updateCartCount();
+}
+
+
+function showCartNotification(message) {
+
+    let notification =
+        document.getElementById(
+            "cart-notification"
+        );
+
+    if (!notification) {
+
+        notification =
+            document.createElement("div");
+
+        notification.id =
+            "cart-notification";
+
+        document.body.appendChild(
+            notification
+        );
+
+    }
+
+    notification.textContent =
+        "✓ " + message;
+
+    notification.classList.add(
+        "show"
+    );
+
+    clearTimeout(
+        notification.hideTimer
+    );
+
+    notification.hideTimer =
+        setTimeout(
+            function() {
+
+                notification.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
+
+}
+
+
+updateCartCount();
 
 </script>
 

@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>ASEBE FABRICS | Place Order</title>
+    <title>The Comfort Spoon | Place Order</title>
 
     <link rel="stylesheet"
           href="/static/css/style.css">
@@ -21,21 +21,20 @@
 <header class="navbar">
 
     <div class="logo">
-        <span>ASEBE</span> FABRICS
+        <span>The Comfort</span> Spoon
     </div>
 
     <nav>
 
         <a href="/">HOME</a>
 
-        <a href="/shop">SHOP</a>
+        <a href="/shop">MENU</a>
 
         <a href="/cart">CART 🛒</a>
 
         <a href="/order">ORDER</a>
 
         <a href="/payment">PAYMENT</a>
-        <a href="/fabric-request">REQUEST FABRIC 🧵</a>
 
     </nav>
 
@@ -45,12 +44,12 @@
 
 <section class="shop-header">
 
-    <p>ASEBE FABRICS</p>
+    <p>THE COMFORT SPOON</p>
 
     <h1>PLACE YOUR ORDER</h1>
 
     <span>
-        Complete your details and review your fabrics.
+        Complete your details and review your selected meals.
     </span>
 
 </section>
@@ -67,13 +66,13 @@
         <div class="form-heading">
 
             <div class="form-icon">
-                🛍️
+                🍽️
             </div>
 
             <h1>Customer Information</h1>
 
             <p>
-                Tell us where to deliver your fabrics.
+                Tell us where you would like your order delivered.
             </p>
 
         </div>
@@ -121,7 +120,7 @@
                     placeholder="08012345678"
                     required>
 
-            <input
+                <input
                     type="hidden"
                     id="cart-data"
                     name="cart">
@@ -157,7 +156,7 @@
                     id="note"
                     name="note"
                     rows="3"
-                    placeholder="Any additional information?"></textarea>
+                    placeholder="Any additional information about your order?"></textarea>
 
             </div>
 
@@ -226,15 +225,15 @@
 <footer>
 
     <div class="footer-logo">
-        ASEBE <span>FABRICS</span>
+        The Comfort <span>Spoon</span>
     </div>
 
     <p>
-        Quality Fabrics • Beautiful Designs • Great Prices
+        Delicious Meals • Great Taste • Warm Moments
     </p>
 
     <p>
-        © 2026 ASEBE FABRICS
+        © 2026 The Comfort Spoon
     </p>
 
 </footer>
@@ -290,7 +289,7 @@ function displayOrder() {
                 <a href="/shop"
                    style="color:#c62828;">
 
-                    Go to Shop
+                    Go to Menu
 
                 </a>
 
@@ -376,7 +375,7 @@ document
                 event.preventDefault();
 
                 alert(
-                    "Your cart is empty. Please select a fabric first."
+                    "Your cart is empty. Please select a meal first."
                 );
 
                 window.location.href = "/shop";
