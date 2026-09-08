@@ -292,8 +292,8 @@ func initDatabase() {
 	log.Println("Orders table ready")
 	log.Println("Order items table ready")
 	// Create admin accounts table
-    // Create customer feedback table
-    _, err = db.Exec(`
+	// Create customer feedback table
+	_, err = db.Exec(`
             CREATE TABLE IF NOT EXISTS feedback (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     customer_id INTEGER NOT NULL,
@@ -306,11 +306,11 @@ func initDatabase() {
             )
     `)
 
-    if err != nil {
-            log.Fatal("Could not create feedback table:", err)
-    }
+	if err != nil {
+		log.Fatal("Could not create feedback table:", err)
+	}
 
-    log.Println("Feedback table ready")
+	log.Println("Feedback table ready")
 
 	createAdminTable()
 

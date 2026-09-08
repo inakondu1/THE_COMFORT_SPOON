@@ -136,6 +136,107 @@
 </section>
 
 
+<!-- SIGNATURE MEALS -->
+
+<section class="signature-menu">
+
+    <div class="section-heading">
+
+        <p class="section-label">
+            FROM OUR KITCHEN
+        </p>
+
+        <h2>
+            OUR <span>SIGNATURE MEALS</span>
+        </h2>
+
+        <p class="signature-intro">
+            A taste of what makes The Comfort Spoon special.
+            Discover some of our favourites and find your next meal.
+        </p>
+
+    </div>
+
+
+    {{if .Products}}
+
+    <div class="signature-grid">
+
+        {{range .Products}}
+
+        <article class="signature-card">
+
+            <div class="signature-image">
+
+                {{if .Image}}
+                <img src="/static/images/{{.Image}}" alt="{{.Name}}">
+                {{else}}
+                <div class="signature-placeholder">
+                    THE COMFORT SPOON
+                </div>
+                {{end}}
+
+            </div>
+
+            <div class="signature-info">
+
+                <p class="signature-tag">
+                    SIGNATURE
+                </p>
+
+                <h3>
+                    {{.Name}}
+                </h3>
+
+                <p>
+                    {{.Description}}
+                </p>
+
+                <div class="signature-bottom">
+
+                    <span class="signature-price">
+                        ₦{{printf "%.2f" .Price}}
+                    </span>
+
+                    <a href="/product?id={{.ID}}" class="signature-link">
+                        VIEW MEAL →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        {{end}}
+
+    </div>
+
+    {{else}}
+
+    <div class="signature-empty">
+
+        <p>
+            Our delicious menu is being prepared.
+            Please check back soon.
+        </p>
+
+    </div>
+
+    {{end}}
+
+
+    <div class="signature-action">
+
+        <a href="/shop" class="text-button">
+            VIEW FULL MENU →
+        </a>
+
+    </div>
+
+</section>
+
+
 <!-- FEATURES -->
 
 <section class="home-features">
@@ -211,6 +312,81 @@
 
         </div>
 
+    </div>
+
+</section>
+
+
+
+<!-- CUSTOMER REVIEWS -->
+
+<section class="home-reviews">
+
+    <div class="section-heading">
+
+        <p class="section-label">
+            FROM OUR CUSTOMERS
+        </p>
+
+        <h2>
+            WHAT OUR CUSTOMERS <span>SAY</span>
+        </h2>
+
+        <p class="reviews-intro">
+            Good food is meant to be shared, and we are grateful
+            for every customer who takes the time to share their experience.
+        </p>
+
+    </div>
+
+    {{if .Feedback}}
+
+    <div class="reviews-grid">
+
+        {{range .Feedback}}
+
+        <article class="review-card">
+
+            <div class="review-stars">
+                {{if ge .Rating 1}}★{{end}}
+                {{if ge .Rating 2}}★{{end}}
+                {{if ge .Rating 3}}★{{end}}
+                {{if ge .Rating 4}}★{{end}}
+                {{if ge .Rating 5}}★{{end}}
+            </div>
+
+            <p class="review-comment">
+                "{{.Comment}}"
+            </p>
+
+            <div class="review-customer">
+                <span class="review-line"></span>
+                <div>
+                    <strong>{{.CustomerName}}</strong>
+                    <small>VERIFIED CUSTOMER</small>
+                </div>
+            </div>
+
+        </article>
+
+        {{end}}
+
+    </div>
+
+    {{else}}
+
+    <div class="reviews-empty">
+        <p>
+            Be one of the first to share your experience with us.
+        </p>
+    </div>
+
+    {{end}}
+
+    <div class="reviews-action">
+        <a href="/feedback" class="text-button">
+            SHARE YOUR EXPERIENCE →
+        </a>
     </div>
 
 </section>

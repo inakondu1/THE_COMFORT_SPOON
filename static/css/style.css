@@ -70,7 +70,7 @@ body {
             rgba(25, 12, 7, 0.68),
             rgba(25, 12, 7, 0.78)
         ),
-        url("/static/images/chef.jpg") center center / cover no-repeat;
+        url("/static/images/chef-home.jpg") center center / cover no-repeat;
 }
 
 .hero::before {
@@ -723,7 +723,7 @@ footer p {
             rgba(24, 12, 7, 0.62),
             rgba(24, 12, 7, 0.80)
         ),
-        url("/static/images/chef.jpg") center center / cover no-repeat;
+        url("/static/images/chef-home.jpg") center center / cover no-repeat;
 }
 
 .hero::before {
@@ -1100,3 +1100,315 @@ footer {
     }
 
 }
+
+
+/* =========================================
+   SIGNATURE MEALS
+   ========================================= */
+
+.signature-menu {
+    padding: 110px 7%;
+    background: #F7EFE3;
+}
+
+.signature-intro {
+    max-width: 600px;
+    margin: 22px auto 0;
+    color: #6F5A4A;
+    line-height: 1.8;
+}
+
+.signature-grid {
+    max-width: 1200px;
+    margin: 60px auto 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.signature-card {
+    background: #FFFFFF;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(62, 22, 12, 0.08);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.signature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 22px 45px rgba(62, 22, 12, 0.15);
+}
+
+.signature-image {
+    height: 245px;
+    overflow: hidden;
+    background: #E8D9C4;
+}
+
+.signature-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.signature-card:hover .signature-image img {
+    transform: scale(1.06);
+}
+
+.signature-placeholder {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    color: #9A7130;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.signature-info {
+    padding: 25px;
+}
+
+.signature-tag {
+    margin: 0 0 10px;
+    color: #9A7130;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.signature-info h3 {
+    margin: 0 0 12px;
+    color: #3E160C;
+    font-size: 20px;
+}
+
+.signature-info > p:not(.signature-tag) {
+    margin: 0;
+    min-height: 54px;
+    color: #756256;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.signature-bottom {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #E8D9C4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.signature-price {
+    color: #3E160C;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.signature-link {
+    color: #9A7130;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.signature-link:hover {
+    color: #3E160C;
+}
+
+.signature-action {
+    margin-top: 55px;
+    text-align: center;
+}
+
+.signature-empty {
+    max-width: 700px;
+    margin: 50px auto 0;
+    padding: 35px;
+    text-align: center;
+    background: #FFFFFF;
+    color: #756256;
+}
+
+
+/* SIGNATURE MEALS — MOBILE */
+
+@media (max-width: 1100px) {
+
+    .signature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .signature-menu {
+        padding: 80px 20px;
+    }
+
+    .signature-grid {
+        grid-template-columns: 1fr;
+        margin-top: 40px;
+    }
+
+    .signature-image {
+        height: 260px;
+    }
+
+    .signature-info {
+        padding: 22px;
+    }
+
+}
+
+
+
+/* =========================================
+   CUSTOMER REVIEWS
+   ========================================= */
+
+.home-reviews {
+    padding: 110px 7%;
+    background: #24120B;
+    color: #F7EFE3;
+}
+
+.home-reviews .section-heading h2 {
+    color: #F7EFE3;
+}
+
+.home-reviews .section-label {
+    color: #D6B36A;
+}
+
+.home-reviews .section-heading h2 span {
+    color: #D6B36A;
+}
+
+.reviews-intro {
+    max-width: 650px;
+    margin: 22px auto 0;
+    color: #D8C8B7;
+    line-height: 1.8;
+}
+
+.reviews-grid {
+    max-width: 1150px;
+    margin: 60px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.review-card {
+    padding: 35px 30px;
+    background: #3E160C;
+    border: 1px solid rgba(214, 179, 106, 0.22);
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(214, 179, 106, 0.55);
+}
+
+.review-stars {
+    color: #D6B36A;
+    font-size: 18px;
+    letter-spacing: 4px;
+}
+
+.review-comment {
+    margin: 25px 0;
+    color: #F7EFE3;
+    font-size: 15px;
+    line-height: 1.8;
+    font-style: italic;
+}
+
+.review-customer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.review-line {
+    width: 30px;
+    height: 1px;
+    background: #D6B36A;
+}
+
+.review-customer strong {
+    display: block;
+    color: #F7EFE3;
+    font-size: 13px;
+}
+
+.review-customer small {
+    display: block;
+    margin-top: 4px;
+    color: #BCA895;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+.reviews-action {
+    margin-top: 55px;
+    text-align: center;
+}
+
+.home-reviews .text-button {
+    color: #D6B36A;
+}
+
+.home-reviews .text-button:hover {
+    color: #F7EFE3;
+}
+
+.reviews-empty {
+    max-width: 650px;
+    margin: 55px auto 0;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid rgba(214, 179, 106, 0.22);
+    color: #D8C8B7;
+}
+
+
+/* CUSTOMER REVIEWS — MOBILE */
+
+@media (max-width: 900px) {
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        max-width: 650px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .home-reviews {
+        padding: 80px 20px;
+    }
+
+    .review-card {
+        padding: 28px 24px;
+    }
+
+}
+

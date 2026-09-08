@@ -84,6 +84,7 @@ func getCustomerSession(r *http.Request) (int, bool) {
 type NavData struct {
 	LoggedIn     bool
 	CustomerName string
+	Products     []Product
 }
 
 func getNavData(r *http.Request) NavData {
@@ -162,9 +163,41 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	type HomePage struct {
 		LoggedIn     bool
 		CustomerName string
+		Products     []Product
 	}
 
 	data := HomePage{}
+
+	rows, err := db.Query(`
+                SELECT id, name, description, price, quantity, image
+                FROM products
+                ORDER BY id DESC
+                LIMIT 4
+        `)
+	if err != nil {
+		http.Error(w, "Could not load menu: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var product Product
+
+		err := rows.Scan(
+			&product.ID,
+			&product.Name,
+			&product.Description,
+			&product.Price,
+			&product.Quantity,
+			&product.Image,
+		)
+		if err != nil {
+			http.Error(w, "Could not load menu: "+err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		data.Products = append(data.Products, product)
+	}
 
 	customerID, ok := getCustomerSession(r)
 
@@ -4495,6 +4528,7 @@ func feedbackHandler(w http.ResponseWriter, r *http.Request) {
 
 	type FeedbackPage struct {
 		CustomerName string
+		Products     []Product
 		Feedback     []Feedback
 		Success      bool
 	}
@@ -4994,6 +5028,7 @@ func adminFabricRequestsHandler(w http.ResponseWriter, r *http.Request) {
 	type FabricRequest struct {
 		ID           int
 		CustomerName string
+		Products     []Product
 		Phone        string
 		Image        string
 		Description  string

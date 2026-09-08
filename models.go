@@ -30,12 +30,11 @@ type FabricRequest struct {
 // =========================
 
 type Feedback struct {
-        ID           int
-        CustomerID   int
-        CustomerName string
-        Rating       int
-        Comment      string
-        Status       string
-        CreatedAt    string
+	ID           int
+	CustomerID   int
+	CustomerName string
+	Rating       int
+	Comment      string
+	Status       string
+	CreatedAt    string
 }
-
