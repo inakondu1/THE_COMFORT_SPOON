@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Customer Feedback</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/cart">CART 🛒</a>
+        <a href="/order">ORDER</a>
+        <a href="/payment">PAYMENT</a>
+        <a href="/customer">MY ACCOUNT</a>
+        <a href="/logout">LOGOUT</a>
+
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>CUSTOMER FEEDBACK</h1>
+
+    <span>
+        We would love to hear from you, {{.CustomerName}}
+    </span>
+
+    <br><br>
+
+    <a
+        href="/customer"
+        class="order-button"
+        style="text-decoration:none; display:inline-block;">
+
+        ← BACK TO DASHBOARD
+
+    </a>
+
+</section>
+
+
+<section style="max-width:1000px; margin:40px auto; padding:20px; background:#f5efe6;">
+
+    {{if .Success}}
+
+    <div style="background:#e8f5e9; padding:15px; margin-bottom:25px; border-radius:8px; text-align:center;">
+
+        <strong>Thank you for your feedback!</strong>
+
+        <p>
+            Your feedback has been submitted and is waiting for approval.
+        </p>
+
+    </div>
+
+    {{end}}
+
+
+    <div class="product-card customer-dashboard-card">
+
+        <div class="product-info">
+
+            <h2>⭐ RATE YOUR EXPERIENCE</h2>
+
+            <p>
+                Your name will be displayed with your feedback.
+            </p>
+
+            <form method="POST" action="/feedback">
+
+                <div style="margin:20px 0;">
+
+                    <label for="rating">
+                        <strong>Rating</strong>
+                    </label>
+
+                    <select
+                        id="rating"
+                        name="rating"
+                        required
+                        style="display:block; margin-top:10px; padding:10px; width:100%; max-width:300px;">
+
+                        <option value="">Select your rating</option>
+                        <option value="5">⭐⭐⭐⭐⭐ — Excellent</option>
+                        <option value="4">⭐⭐⭐⭐ — Very Good</option>
+                        <option value="3">⭐⭐⭐ — Good</option>
+                        <option value="2">⭐⭐ — Fair</option>
+                        <option value="1">⭐ — Poor</option>
+
+                    </select>
+
+                </div>
+
+
+                <div style="margin:20px 0;">
+
+                    <label for="comment">
+                        <strong>Your Feedback</strong>
+                    </label>
+
+                    <textarea
+                        id="comment"
+                        name="comment"
+                        rows="6"
+                        required
+                        placeholder="Tell us about your experience with ASEBE FABRICS..."
+                        style="display:block; margin-top:10px; padding:12px; width:100%; max-width:700px; box-sizing:border-box;"></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="order-button">
+
+                    SUBMIT FEEDBACK
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <div style="margin-top:40px;">
+
+        <h2 style="text-align:center;">
+            WHAT OUR CUSTOMERS SAY
+        </h2>
+
+
+        {{if .Feedback}}
+
+        <div class="products">
+
+            {{range .Feedback}}
+
+            <div class="product-card customer-dashboard-card">
+
+                <div class="product-info">
+
+                    <h3>
+                        {{.CustomerName}}
+                    </h3>
+
+                    <p style="font-size:20px;">
+
+                        {{if eq .Rating 5}}
+                            ⭐⭐⭐⭐⭐
+                        {{else if eq .Rating 4}}
+                            ⭐⭐⭐⭐
+                        {{else if eq .Rating 3}}
+                            ⭐⭐⭐
+                        {{else if eq .Rating 2}}
+                            ⭐⭐
+                        {{else}}
+                            ⭐
+                        {{end}}
+
+                    </p>
+
+                    <p>
+                        {{.Comment}}
+                    </p>
+
+                    <small>
+                        {{.CreatedAt}}
+                    </small>
+
+                </div>
+
+            </div>
+
+            {{end}}
+
+        </div>
+
+        {{else}}
+
+        <p style="text-align:center; margin-top:25px;">
+            Be the first customer to share your experience with ASEBE FABRICS.
+        </p>
+
+        {{end}}
+
+    </div>
+
+</section>
+
+
+</body>
+
+</html>

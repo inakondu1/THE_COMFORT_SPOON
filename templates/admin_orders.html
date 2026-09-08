@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Customer Orders</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+        <a href="/admin">ADMIN</a>
+        <a href="/shop">SHOP</a>
+        <a href="/">HOME</a>
+    </nav>
+
+</header>
+
+
+<section class="admin-page">
+
+    <div class="admin-container">
+
+        <div class="admin-heading">
+
+            <p>ASEBE FABRICS</p>
+
+            <h1>CUSTOMER ORDERS</h1>
+
+            <span>
+                Manage customer orders, payments and outstanding balances.
+            </span>
+
+        </div>
+
+          <form method="GET" action="/admin/orders" class="order-search">
+              <input
+                  type="text"
+                  name="search"
+                  value="{{.Search}}"
+                  placeholder="Search customer by name"
+              >
+
+              <button type="submit">
+                  SEARCH
+              </button>
+
+              {{if .Search}}
+              <a href="/admin/orders">
+                  SHOW ALL
+              </a>
+              {{end}}
+          </form>
+
+
+
+        {{if .Orders}}
+
+        <div class="orders-list">
+
+            {{range .Orders}}
+
+            <div class="order-card">
+
+                <div class="order-card-header">
+
+                    <div>
+                        <span class="order-label">
+                            ORDER
+                        </span>
+
+                        <h2>
+                            #{{.ID}}
+                        </h2>
+                    </div>
+
+                    <div class="order-status">
+                        {{.PaymentStatus}}
+                    </div>
+
+                </div>
+
+
+                <div class="order-customer">
+
+                    <h3>
+                        {{.CustomerName}}
+                    </h3>
+
+                    <p>
+                        📞 {{.Phone}}
+                    </p>
+
+                </div>
+
+
+                <div class="order-financials">
+
+                    <div>
+                        <span>ORDER TOTAL</span>
+                        <strong>
+                            ₦{{printf "%.0f" .Total}}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>AMOUNT PAID</span>
+                        <strong>
+                            ₦{{printf "%.0f" .AmountPaid}}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>BALANCE</span>
+                        <strong>
+                            ₦{{printf "%.0f" .Balance}}
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="order-date">
+
+                    <span>
+                        Order date
+                    </span>
+
+                    <strong>
+                        {{.CreatedAt}}
+                    </strong>
+
+                </div>
+
+            </div>
+
+            {{end}}
+
+        </div>
+
+
+        {{else}}
+
+        <div class="no-fabrics">
+
+            <p>
+                No customer orders have been placed yet.
+            </p>
+
+            <a href="/shop">
+                VIEW SHOP
+            </a>
+
+        </div>
+
+        {{end}}
+
+
+        <div class="admin-back">
+
+            <a href="/admin">
+                ← BACK TO ADMIN DASHBOARD
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Admin Area • Customer Orders
+    </p>
+
+</footer>
+
+</body>
+
+</html>

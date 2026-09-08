@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Cart</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/cart">
+            CART 🛒 <span id="cart-count"></span>
+        </a>
+        <a href="/order">ORDER</a>
+        <a href="/payment">PAYMENT</a>
+        <a href="/fabric-request">REQUEST FABRIC 🧵</a>
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>YOUR CART</h1>
+
+    <span>
+        Review your selected fabrics before placing your order.
+    </span>
+
+</section>
+
+
+<section
+    id="cart-container"
+    style="max-width:1000px; margin:40px auto; padding:20px;">
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+    <p>
+        © 2026 ASEBE FABRICS
+    </p>
+
+</footer>
+
+
+<script>
+
+function getCart() {
+
+    return JSON.parse(
+        localStorage.getItem("asebeCart")
+    ) || [];
+
+}
+
+
+function saveCart(cart) {
+
+    localStorage.setItem(
+        "asebeCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+function updateCartCount(cart) {
+
+    let count = 0;
+
+    cart.forEach(function(item) {
+        count += item.quantity;
+    });
+
+    document.getElementById("cart-count").innerText =
+        count > 0 ? "(" + count + ")" : "";
+
+}
+
+
+function renderCart() {
+
+    const container =
+        document.getElementById("cart-container");
+
+    const cart = getCart();
+
+    updateCartCount(cart);
+
+
+    if (cart.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-shop">
+
+                <h2>
+                    Your cart is empty 🛒
+                </h2>
+
+                <p>
+                    You have not selected any fabrics yet.
+                </p>
+
+                <br>
+
+                <a
+                    href="/shop"
+                    class="order-button"
+                    style="text-decoration:none;
+                           display:inline-block;">
+
+                    GO TO SHOP
+
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    let total = 0;
+
+    let totalItems = 0;
+
+    let html = "";
+
+
+    cart.forEach(function(item, index) {
+
+        const itemTotal =
+            item.price * item.quantity;
+
+        total += itemTotal;
+
+        totalItems += item.quantity;
+
+
+        html += `
+
+            <div
+                class="product-card"
+                style="margin-bottom:20px;">
+
+                <div class="product-info">
+
+                    <h2>
+                        ${item.name}
+                    </h2>
+
+                    <p>
+                        Price:
+                        ₦${item.price.toLocaleString()}
+                    </p>
+
+                    <p>
+                        Quantity:
+                    </p>
+
+
+                    <div
+                        style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        margin:15px 0;
+                        ">
+
+                        <button
+                            onclick="decreaseQuantity(${index})"
+                            class="order-button"
+                            style="width:auto; padding:10px 18px;">
+
+                            −
+
+                        </button>
+
+
+                        <strong
+                            style="font-size:20px;">
+
+                            ${item.quantity}
+
+                        </strong>
+
+
+                        <button
+                            onclick="increaseQuantity(${index})"
+                            class="order-button"
+                            style="width:auto; padding:10px 18px;">
+
+                            +
+
+                        </button>
+
+                    </div>
+
+
+                    <p>
+                        Subtotal:
+                    </p>
+
+                    <strong>
+                        ₦${itemTotal.toLocaleString()}
+                    </strong>
+
+                    <br><br>
+
+
+                    <button
+                        onclick="removeItem(${index})"
+                        class="order-button">
+
+                        REMOVE
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `
+
+        <div
+            class="empty-shop"
+            style="text-align:center;">
+
+            <h2>
+                ${totalItems} item(s)
+            </h2>
+
+
+            <h1>
+                TOTAL:
+                ₦${total.toLocaleString()}
+            </h1>
+
+
+            <br>
+
+
+            <a
+                href="/shop"
+                class="order-button"
+                style="text-decoration:none;
+                       display:inline-block;
+                       margin:5px;">
+
+                CONTINUE SHOPPING
+
+            </a>
+
+
+            <a
+                href="/order"
+                class="order-button"
+                style="text-decoration:none;
+                       display:inline-block;
+                       margin:5px;">
+
+                PLACE ORDER
+
+            </a>
+
+        </div>
+
+    `;
+
+
+    container.innerHTML = html;
+
+}
+
+
+function increaseQuantity(index) {
+
+    const cart = getCart();
+
+    cart[index].quantity++;
+
+    saveCart(cart);
+
+    renderCart();
+
+}
+
+
+function decreaseQuantity(index) {
+
+    const cart = getCart();
+
+    if (cart[index].quantity > 1) {
+
+        cart[index].quantity--;
+
+    } else {
+
+        cart.splice(index, 1);
+
+    }
+
+    saveCart(cart);
+
+    renderCart();
+
+}
+
+
+function removeItem(index) {
+
+    const cart = getCart();
+
+    cart.splice(index, 1);
+
+    saveCart(cart);
+
+    renderCart();
+
+}
+
+
+renderCart();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Pay Outstanding</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/cart">CART 🛒</a>
+        <a href="/customer">MY ACCOUNT</a>
+        <a href="/order-history">ORDER HISTORY</a>
+        <a href="/logout">LOGOUT</a>
+
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>PAY OUTSTANDING BALANCE</h1>
+
+    <span>
+        Pay your outstanding balance without placing a new order.
+    </span>
+
+</section>
+
+
+<section style="max-width:700px; margin:40px auto; padding:20px;">
+
+    {{if .HasBalance}}
+
+    <div class="product-card">
+
+        <div class="product-info">
+
+            <h2>💳 OUTSTANDING BALANCE</h2>
+
+            <p>
+                <strong>Order #{{.OrderID}}</strong>
+            </p>
+
+            <p>
+                Order Total:
+                <strong>₦{{printf "%.2f" .Total}}</strong>
+            </p>
+
+            <p>
+                Already Paid:
+                <strong>₦{{printf "%.2f" .AmountPaid}}</strong>
+            </p>
+
+            <hr>
+
+            <h2>
+                Remaining Balance:
+                ₦{{printf "%.2f" .Balance}}
+            </h2>
+
+            <form method="POST" action="/pay-outstanding">
+
+                <label for="amount_paid">
+                    Enter Amount to Pay
+                </label>
+
+                <input
+                    type="number"
+                    id="amount_paid"
+                    name="amount_paid"
+                    min="1"
+                    max="{{printf "%.2f" .Balance}}"
+                    step="0.01"
+                    placeholder="Enter payment amount"
+                    required
+                    style="width:100%; padding:12px; margin:10px 0 20px;">
+
+                <button
+                    type="submit"
+                    class="order-button"
+                    style="border:none; cursor:pointer;">
+
+                    PAY OUTSTANDING 💳
+
+                </button>
+
+            </form>
+
+            <p style="margin-top:20px;">
+                You can pay the full balance or make another
+                partial payment.
+            </p>
+
+        </div>
+
+    </div>
+
+    {{else}}
+
+    <div class="product-card">
+
+        <div class="product-info">
+
+            <h2>✅ NO OUTSTANDING BALANCE</h2>
+
+            <p>
+                You currently have no unpaid balance.
+            </p>
+
+            <a
+                href="/shop"
+                class="order-button"
+                style="text-decoration:none; display:inline-block;">
+
+                CONTINUE SHOPPING
+
+            </a>
+
+        </div>
+
+    </div>
+
+    {{end}}
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+    <p>
+        © 2026 ASEBE FABRICS
+    </p>
+
+</footer>
+
+</body>
+
+</html>

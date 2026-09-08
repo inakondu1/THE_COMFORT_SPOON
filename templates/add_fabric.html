@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Add Fabric</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/admin">ADMIN</a>
+    </nav>
+
+</header>
+
+
+<main class="add-fabric-page">
+
+    <div class="add-fabric-card">
+
+        <a href="/admin" class="back-button">
+            ← BACK TO ADMIN DASHBOARD
+        </a>
+
+        <div class="form-heading">
+
+            <span class="form-icon">🧵</span>
+
+            <h1>ADD NEW FABRIC</h1>
+
+            <p>
+                Add a new fabric to your ASEBE FABRICS collection.
+            </p>
+
+        </div>
+
+
+        <form
+            action="/admin/add-fabric"
+            method="POST"
+            enctype="multipart/form-data"
+            class="fabric-form"
+        >
+
+            <div class="form-group">
+
+                <label for="name">
+                    Fabric Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="e.g. Royal Ankara"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="description">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="5"
+                    placeholder="Describe the fabric..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="price">
+                        Price (₦)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price"
+                        name="price"
+                        placeholder="25000"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="quantity">
+                        Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        name="quantity"
+                        placeholder="10"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="image">
+                    Fabric Image
+                </label>
+
+                <div class="image-upload">
+
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/*"
+                    >
+
+                    <div class="upload-text">
+
+                        <span>📷</span>
+
+                        <strong>
+                            Choose a fabric image
+                        </strong>
+
+                        <small>
+                            JPG, PNG or WEBP
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="image-preview" id="preview-container">
+
+                <img
+                    id="preview"
+                    src=""
+                    alt="Fabric preview"
+                >
+
+                <p id="preview-text">
+                    Image preview will appear here
+                </p>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <a
+                    href="/admin"
+                    class="cancel-button"
+                >
+                    CANCEL
+                </a>
+
+                <button
+                    type="submit"
+                    class="save-button"
+                >
+                    SAVE FABRIC
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+</footer>
+
+
+<script>
+
+const imageInput = document.getElementById("image");
+const preview = document.getElementById("preview");
+const previewText = document.getElementById("preview-text");
+
+imageInput.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (!file) {
+        preview.style.display = "none";
+        previewText.style.display = "block";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+
+        preview.src = event.target.result;
+
+        preview.style.display = "block";
+
+        previewText.style.display = "none";
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+</script>
+
+</body>
+
+</html>

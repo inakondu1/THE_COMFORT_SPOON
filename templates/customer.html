@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Customer Dashboard</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<script>
+(function () {
+
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("new_login") === "1") {
+
+        // Start a completely fresh shopping session.
+        localStorage.removeItem("asebeCart");
+
+        // Remove the login flag from the address bar.
+        params.delete("new_login");
+
+        const newURL =
+            window.location.pathname +
+            (params.toString() ? "?" + params.toString() : "");
+
+        window.history.replaceState({}, "", newURL);
+    }
+
+})();
+</script>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/cart">CART 🛒</a>
+        <a href="/order">ORDER</a>
+        <a href="/payment">PAYMENT</a>
+        <a href="/customer">MY ACCOUNT</a>
+        <a href="/logout">LOGOUT</a>
+
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>MY CUSTOMER DASHBOARD</h1>
+
+    <span>
+        Welcome back, {{.Name}}
+    </span>
+
+</section>
+
+
+<section style="max-width:1000px; margin:40px auto; padding:20px; background:#f5efe6;">
+
+    <div class="products">
+
+
+        <div class="product-card customer-dashboard-card">
+
+            <div class="product-info">
+
+                <h2>MY ACCOUNT</h2>
+
+                <p>
+                    <strong>Name:</strong>
+                    {{.Name}}
+                </p>
+
+                <p>
+                    <strong>Phone:</strong>
+                    {{.Phone}}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="product-card customer-dashboard-card">
+
+            <div class="product-info">
+
+                <h2>📋 MY ORDER HISTORY</h2>
+
+                <p>
+                    View all your previous orders,
+                    payments, balances and receipts.
+                </p>
+
+                <a
+                    href="/order-history?phone={{.Phone}}"
+                    class="order-button"
+                    style="text-decoration:none; display:inline-block;">
+
+                    VIEW MY ORDER HISTORY
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="product-card customer-dashboard-card">
+
+            <div class="product-info">
+
+                <h2>💳 PAYMENT & OUTSTANDING BALANCE</h2>
+
+        
+
+
+
+                <p>
+                    Do you have an outstanding balance?
+                </p>
+
+                <p>
+                    You can make a payment without
+                    placing a new order.
+                </p>
+
+                <a
+                    href="/pay-outstanding"
+                    class="order-button"
+                    style="text-decoration:none; display:inline-block;">
+
+                    PAY OUTSTANDING 💳
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="product-card customer-dashboard-card">
+
+            <div class="product-info">
+
+                <h2>🧵 MY FABRIC REQUESTS</h2>
+
+                <p>
+                    View fabrics you requested
+                    and check their current status.
+                </p>
+
+                <a
+                    href="/fabric-request"
+                    class="order-button"
+                    style="text-decoration:none; display:inline-block;">
+
+                    REQUEST A FABRIC 🧵
+
+                </a>
+
+                <br><br>
+
+                <a
+                    href="/my-fabric-requests"
+                    class="order-button"
+                    style="text-decoration:none; display:inline-block;">
+
+                    VIEW MY REQUESTS 📋
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="product-card customer-dashboard-card">
+
+            <div class="product-info">
+
+                <h2>⭐ CUSTOMER FEEDBACK</h2>
+
+                <p>
+                    Tell us about your experience with
+                    ASEBE FABRICS and rate our service.
+                </p>
+
+                <a
+                    href="/feedback"
+                    class="order-button"
+                    style="text-decoration:none; display:inline-block;">
+
+                    LEAVE FEEDBACK ⭐
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+<div class="product-card customer-dashboard-card">
+
+            <div class="product-info">
+
+                <h2>💬 CUSTOMER SERVICE</h2>
+
+                <p>
+                    Need help with your order?
+                    Our customer service team is
+                    here to assist you.
+                </p>
+
+                <a
+                    href="https://wa.me/2348101228840?text=Hello%20ASEBE%20FABRICS!%20I%20need%20help%20with%20my%20order."
+                    target="_blank"
+                    class="order-button"
+                    style="text-decoration:none; display:inline-block;">
+
+                    CHAT WITH US 💬
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="product-card customer-dashboard-card">
+
+            <div class="product-info">
+
+                <h2> THANK YOU</h2>
+
+                <p>
+                    Thank you for choosing
+                    ASEBE FABRICS.
+                </p>
+
+                <p>
+                    We truly appreciate your
+                    business and look forward
+                    to serving you again.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+    <p>
+        © 2026 ASEBE FABRICS
+    </p>
+
+</footer>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+if (params.get("new_login") === "1") {
+    localStorage.removeItem("asebeCart");
+
+    params.delete("new_login");
+
+    const cleanURL =
+        window.location.pathname +
+        (params.toString() ? "?" + params.toString() : "");
+
+    window.history.replaceState({}, "", cleanURL);
+}
+</script>
+
+</body>
+
+</html>

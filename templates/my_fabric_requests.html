@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Fabric Requests</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+<header class="request-navbar">
+    <a href="/">HOME</a>
+    <a href="/shop">SHOP</a>
+    <a href="/customer">MY ACCOUNT</a>
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>🧵 MY FABRIC REQUESTS</h1>
+
+</section>
+
+
+<section style="max-width:1000px; margin:40px auto; padding:20px;">
+
+
+{{range .}}
+
+<div class="product-card">
+
+    <div class="product-info">
+
+        <h2>Fabric Request #{{.ID}}</h2>
+
+        <p>
+            <strong>Description:</strong>
+            {{.Description}}
+        </p>
+
+
+        <p>
+            <strong>Quantity:</strong>
+            {{.Quantity}}
+        </p>
+
+
+        <p>
+            <strong>Status:</strong>
+            {{.Status}}
+        </p>
+
+        {{if eq .Status "AVAILABLE"}}
+        <div style="margin-top:20px;padding:20px;border-radius:10px;background:#e8f5e9;border:2px solid #2e7d32;">
+            <h2 style="color:#2e7d32;">🔔 FABRIC AVAILABLE!</h2>
+            <p>The fabric you requested is now available.</p>
+            <p><strong>{{.Description}}</strong></p>
+            <a href="/shop" style="display:inline-block;margin-top:10px;background:#b30000;color:white;padding:12px 20px;border-radius:8px;text-decoration:none;">🛍️ SHOP NOW</a>
+        </div>
+        {{end}}
+
+
+        <p>
+            <strong>Date:</strong>
+            {{.CreatedAt}}
+        </p>
+
+
+        {{if .Image}}
+
+        <img 
+        src="{{.Image}}" 
+        style="max-width:300px;">
+
+        {{end}}
+
+
+    </div>
+
+</div>
+
+
+{{else}}
+
+<p>
+You have not made any fabric requests yet.
+</p>
+
+{{end}}
+
+
+</section>
+
+
+</body>
+</html>

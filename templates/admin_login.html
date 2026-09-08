@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Admin Login</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>ADMIN LOGIN</h1>
+
+    <span>
+        Secure access to your business dashboard.
+    </span>
+
+</section>
+
+
+<section class="add-fabric-page">
+
+    <div class="add-fabric-card">
+
+        {{if .Message}}
+        <div class="outstanding-box"
+             style="margin-bottom:20px; text-align:center;">
+            {{.Message}}
+        </div>
+        {{end}}
+
+
+        <div class="form-heading">
+
+            <h1>Welcome Back</h1>
+
+            <p>
+                Sign in to manage ASEBE FABRICS.
+            </p>
+
+        </div>
+
+
+        <form
+            class="fabric-form"
+            method="POST"
+            action="/asebe-control/login">
+
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter admin username"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter admin password"
+                    required>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="btn">
+                    LOGIN
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Admin Area • Secure Login
+    </p>
+
+</footer>
+
+</body>
+
+</html>

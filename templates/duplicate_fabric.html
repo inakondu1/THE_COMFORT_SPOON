@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Fabric Already Exists</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/admin">ADMIN</a>
+    </nav>
+
+</header>
+
+
+<main class="add-fabric-page">
+
+    <div class="add-fabric-card">
+
+        <a href="/admin/add-fabric" class="back-button">
+            ← BACK TO ADD FABRIC
+        </a>
+
+        <div class="form-heading">
+
+            <span class="form-icon">⚠️</span>
+
+            <h1>FABRIC ALREADY EXISTS</h1>
+
+            <p>
+                A fabric with this name is already in your collection.
+            </p>
+
+        </div>
+
+
+        <div style="text-align: center; margin: 30px 0;">
+
+            {{if .Image}}
+
+                <img
+                    src="{{.Image}}"
+                    alt="{{.Name}}"
+                    style="
+                        width: 280px;
+                        max-width: 100%;
+                        height: 280px;
+                        object-fit: cover;
+                        border-radius: 12px;
+                        display: block;
+                        margin: 0 auto 25px;
+                    "
+                >
+
+            {{else}}
+
+                <div
+                    style="
+                        width: 280px;
+                        height: 280px;
+                        max-width: 100%;
+                        margin: 0 auto 25px;
+                        border-radius: 12px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: #eee;
+                        font-size: 60px;
+                    "
+                >
+                    🧵
+                </div>
+
+            {{end}}
+
+
+            <h2>
+                {{.Name}}
+            </h2>
+
+            {{if .Description}}
+            <p>
+                {{.Description}}
+            </p>
+            {{end}}
+
+        </div>
+
+
+        <div
+            style="
+                padding: 20px;
+                margin: 20px 0;
+                border-radius: 10px;
+                background: rgba(255,255,255,0.08);
+            "
+        >
+
+            <p>
+                <strong>Price:</strong>
+                ₦{{printf "%.2f" .Price}}
+            </p>
+
+            <p>
+                <strong>Quantity in stock:</strong>
+                {{.Quantity}}
+            </p>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <a
+                href="/admin/add-fabric"
+                class="cancel-button"
+            >
+                GO BACK
+            </a>
+
+            <a
+                href="/admin/edit-fabric?id={{.ID}}"
+                class="save-button"
+            >
+                EDIT THIS FABRIC
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+</footer>
+
+</body>
+
+</html>

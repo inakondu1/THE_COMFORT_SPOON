@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Comfort Spoon</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+    <span>The Comfort</span> Spoon
+</div>
+
+<nav>
+
+    <a href="/">HOME</a>
+
+    <a href="/shop">MENU</a>
+
+    <a href="/cart">CART 🛒</a>
+
+    {{if .LoggedIn}}
+
+        <a href="/customer">MY ACCOUNT</a>
+
+        <a href="/order-history">ORDER HISTORY</a>
+
+        <a href="/logout">LOGOUT</a>
+
+    {{else}}
+
+        <a href="/register">REGISTER</a>
+
+        <a href="/login">LOGIN</a>
+
+    {{end}}
+
+</nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+    {{if .LoggedIn}}
+
+    <p class="hero-small">
+        WELCOME BACK, {{.CustomerName}}
+    </p>
+
+    {{else}}
+
+    <p class="hero-small">
+        WELCOME TO
+    </p>
+
+    {{end}}
+
+    <h1>
+        THE COMFORT <span>SPOON</span>
+    </h1>
+
+    <p>
+        Delicious meals, warm moments and
+        flavours you'll love.
+        Good food made with care and served with comfort.
+    </p>
+
+    <a href="/shop"
+       class="order-button"
+       style="text-decoration:none; display:inline-block;">
+
+        VIEW OUR MENU
+
+    </a>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="shop-header">
+
+<p>THE COMFORT SPOON</p>
+
+<h1>
+    GREAT TASTE • QUALITY • COMFORT
+</h1>
+
+<span>
+    Enjoy delicious meals prepared with care for every occasion.
+</span>
+
+</section>
+
+<!-- FEATURES -->
+
+<section style="max-width:1000px; margin:40px auto; padding:20px;">
+
+<div class="products">
+
+    <div class="product-card">
+
+        <div class="product-info">
+
+            <h2>
+                DELICIOUS MEALS
+            </h2>
+
+            <p>
+                Enjoy carefully prepared meals made with
+                quality ingredients and flavours you'll want
+                to come back for.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="product-card">
+
+        <div class="product-info">
+
+            <h2>
+                EASY ORDERING
+            </h2>
+
+            <p>
+                Browse our menu, choose your favourite meals,
+                add them to your cart and place your order
+                with ease.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="product-card">
+
+        <div class="product-info">
+
+            <h2>
+                CONVENIENT PAYMENT
+            </h2>
+
+            <p>
+                Make your payment conveniently and keep track
+                of your orders and payment history from your
+                account.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- CALL TO ACTION -->
+
+<section class="shop-header">
+
+<p>
+    HUNGRY?
+</p>
+
+<h1>
+    FIND SOMETHING DELICIOUS
+</h1>
+
+<a href="/shop"
+   class="order-button"
+   style="text-decoration:none; display:inline-block;">
+
+    EXPLORE OUR MENU
+
+</a>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer-logo">
+    The Comfort <span>Spoon</span>
+</div>
+
+<p>
+    Delicious Meals • Great Taste • Warm Moments
+</p>
+
+<div class="social-footer">
+
+    <h3>CONNECT WITH US</h3>
+
+    <p class="social-intro">
+        Follow <strong>The Comfort Spoon</strong> for new meals,
+        special offers, updates and more.
+    </p>
+
+    <div class="social-links">
+
+        <a href="#" aria-label="Facebook">
+            <span>f</span>
+            <strong>Facebook</strong>
+            <small>@TheComfortSpoon</small>
+        </a>
+
+        <a href="#" aria-label="Instagram">
+            <span>◎</span>
+            <strong>Instagram</strong>
+            <small>@TheComfortSpoon</small>
+        </a>
+
+        <a href="#" aria-label="TikTok">
+            <span>♪</span>
+            <strong>TikTok</strong>
+            <small>@TheComfortSpoon</small>
+        </a>
+
+        <a href="#" aria-label="X">
+            <span>𝕏</span>
+            <strong>X</strong>
+            <small>@TheComfortSpoon</small>
+        </a>
+
+        <a href="#" aria-label="WhatsApp">
+            <span>◉</span>
+            <strong>WhatsApp</strong>
+            <small>Coming soon</small>
+        </a>
+
+    </div>
+
+</div>
+
+<p>
+    © 2026 The Comfort Spoon
+</p>
+
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Shop</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/cart">CART 🛒 <span id="cart-count">(0)</span></a>
+        <a href="/order">ORDER</a>
+        <a href="/payment">PAYMENT</a>
+        <a href="/fabric-request">REQUEST FABRIC 🧵</a>
+
+        {{if .LoggedIn}}
+
+            <a href="/customer">MY ACCOUNT</a>
+            <a href="/order-history">ORDER HISTORY</a>
+            <a href="/logout">LOGOUT</a>
+
+        {{else}}
+
+            <a href="/register">REGISTER</a>
+            <a href="/login">LOGIN</a>
+
+        {{end}}
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>OUR FABRICS</h1>
+
+    <span>
+        Discover beautiful fabrics for every occasion.
+    </span>
+
+    {{if .IsAdmin}}
+    <div style="margin-top: 20px;">
+        <a href="/admin" class="back-button">
+            ← BACK TO ADMIN DASHBOARD
+        </a>
+    </div>
+    {{end}}
+
+</section>
+
+
+<section class="new-arrivals" style="text-align:center;margin:40px 0;">
+
+    <h2>NEW ARRIVALS</h2>
+
+    <div class="products">
+
+        {{range .NewArrivals}}
+
+        <div class="product-card">
+
+            {{if .Image}}
+                <img src="{{.Image}}" alt="{{.Name}}">
+            {{else}}
+                <div class="no-image">
+                    <span>🧵</span>
+                    <p>Fabric Image</p>
+                </div>
+            {{end}}
+
+            <div class="product-info">
+                <h2>{{.Name}}</h2>
+                <p>{{.Description}}</p>
+                <div class="fabric-price">₦{{printf "%.0f" .Price}}</div>
+
+                {{if gt .Quantity 0}}
+
+                    <button
+                        class="order-button"
+                        data-id="{{.ID}}"
+                        data-name="{{.Name}}"
+                        data-price="{{.Price}}">
+
+                        ADD TO CART 🛒
+
+                    </button>
+
+                {{else}}
+
+                    <button
+                        class="order-button"
+                        disabled>
+
+                        OUT OF STOCK
+
+                    </button>
+
+                {{end}}
+
+            </div>
+
+        </div>
+
+        {{end}}
+
+    </div>
+
+</section>
+
+<section class="fabric-search" style="text-align:center;margin:30px 0;">
+
+    <form method="GET" action="/shop">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search fabrics..."
+            style="padding:12px;width:280px;border-radius:8px;border:1px solid #ccc;">
+
+        <button
+            type="submit"
+            style="padding:12px 20px;background:#b30000;color:white;border:none;border-radius:8px;cursor:pointer;">
+            🔍 SEARCH
+        </button>
+
+    </form>
+
+</section>
+
+
+<section class="products">
+
+    {{if .}}
+
+        {{range .Products}}
+
+        <div class="product-card">
+
+            <!-- FABRIC IMAGE -->
+
+            {{if .Image}}
+
+                <img
+                    src="{{.Image}}"
+                    alt="{{.Name}}">
+
+            {{else}}
+
+                <div class="no-image">
+
+                    <span>🧵</span>
+
+                    <p>Fabric Image</p>
+
+                </div>
+
+            {{end}}
+
+
+            <!-- FABRIC INFORMATION -->
+
+            <div class="product-info">
+
+                <h2>
+                    {{.Name}}
+                </h2>
+
+
+                <p>
+                    {{.Description}}
+                </p>
+
+
+                <div class="fabric-price">
+                    ₦{{printf "%.0f" .Price}}
+                </div>
+
+
+                <div class="stock">
+
+                    {{if gt .Quantity 0}}
+
+                        <span class="available">
+                            ● In Stock
+                        </span>
+
+                    {{else}}
+
+                        <span class="sold-out">
+                            ● Out of Stock
+                        </span>
+
+                    {{end}}
+
+                </div>
+
+
+                {{if gt .Quantity 0}}
+
+                    <button
+                        class="order-button"
+                        data-id="{{.ID}}"
+                        data-name="{{.Name}}"
+                        data-price="{{.Price}}">
+
+                        ADD TO CART 🛒
+
+                    </button>
+
+                {{else}}
+
+                    <button
+                        class="order-button"
+                        disabled>
+
+                        OUT OF STOCK
+
+                    </button>
+
+                {{end}}
+
+            </div>
+
+        </div>
+
+        {{end}}
+
+    {{else}}
+
+        <div class="empty-shop">
+
+            <h2>
+                No fabrics available yet.
+            </h2>
+
+            <p>
+                New fabrics will appear here
+                when they are added.
+            </p>
+
+        </div>
+
+    {{end}}
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+    <p>
+        © 2026 ASEBE FABRICS
+    </p>
+
+</footer>
+
+
+<script>
+
+document
+    .querySelectorAll(".order-button")
+    .forEach(function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                const id =
+                    parseInt(
+                        this.dataset.id
+                    );
+
+                const name =
+                    this.dataset.name;
+
+                const price =
+                    parseFloat(
+                        this.dataset.price
+                    );
+
+
+                let cart =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "asebeCart"
+                        )
+                    ) || [];
+
+                cart = cart.filter(function(item) {
+                    return Number.isInteger(item.id) && item.id > 0;
+                });
+
+
+                let existing =
+                    cart.find(
+                        function(item) {
+
+                            return item.name === name;
+
+                        }
+                    );
+
+
+                if (existing) {
+
+                    existing.quantity++;
+
+                } else {
+
+                    cart.push({
+
+                        id: id,
+
+                        name: name,
+
+                        price: price,
+
+                        quantity: 1
+
+                    });
+
+                }
+
+
+                localStorage.setItem(
+                    "asebeCart",
+                    JSON.stringify(cart)
+                );
+
+                updateCartCount();
+
+                showCartNotification(
+                    name +
+                    " has been added to your cart!"
+                );
+
+            }
+        );
+
+    });
+
+    function updateCartCount() {
+
+        const cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "asebeCart"
+                )
+            ) || [];
+
+        const count =
+            cart.reduce(
+                function(total, item) {
+                    return total + (item.quantity || 0);
+                },
+                0
+            );
+
+        const cartCount =
+            document.getElementById(
+                "cart-count"
+            );
+
+        if (cartCount) {
+
+            cartCount.textContent =
+                "(" + count + ")";
+
+        }
+    }
+
+    function showCartNotification(message) {
+
+        let notification =
+            document.getElementById(
+                "cart-notification"
+            );
+
+        if (!notification) {
+
+            notification =
+                document.createElement("div");
+
+            notification.id =
+                "cart-notification";
+
+            document.body.appendChild(
+                notification
+            );
+        }
+
+        notification.textContent =
+            "✓ " + message;
+
+        notification.classList.add(
+            "show"
+        );
+
+        clearTimeout(
+            notification.hideTimer
+        );
+
+        notification.hideTimer =
+            setTimeout(
+                function() {
+
+                    notification.classList.remove(
+                        "show"
+                    );
+
+                },
+                2500
+            );
+    }
+
+    updateCartCount();
+
+</script>
+
+
+</body>
+
+</html>

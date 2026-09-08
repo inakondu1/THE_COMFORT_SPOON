@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Payment</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/cart">CART 🛒</a>
+        <a href="/order">ORDER</a>
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>PAYMENT</h1>
+
+    <span>
+        Review your order breakdown before making payment.
+    </span>
+
+</section>
+
+
+<section style="max-width:600px; margin:40px auto; padding:20px;">
+
+    <!-- ========================= -->
+    <!-- ORDER BREAKDOWN -->
+    <!-- ========================= -->
+
+    <div class="product-card">
+
+        <div class="product-info">
+
+            <h2>YOUR ORDER</h2>
+
+            <hr>
+
+            <p>
+                <strong>NEW FABRICS</strong>
+            </p>
+
+            <h2>
+                ₦{{.CurrentOrderTotal}}
+            </h2>
+
+
+            {{if gt .PreviousBalance 0.0}}
+
+            <div style="
+                margin-top:20px;
+                padding:18px;
+                border:2px solid #c00;
+                border-radius:10px;
+            ">
+
+                <p>
+                    <strong>⚠️ PREVIOUS BALANCE</strong>
+                </p>
+
+                <h2>
+                    ₦{{.PreviousBalance}}
+                </h2>
+
+                <p style="margin-bottom:0;">
+                    This amount was unpaid from a previous
+                    order and has been carried forward to
+                    this order.
+                </p>
+
+                {{if gt .PreviousBalanceOrderID 0}}
+
+                <p style="margin-top:10px;">
+                    Previous Order:
+                    <strong>
+                        #{{.PreviousBalanceOrderID}}
+                    </strong>
+                </p>
+
+                {{end}}
+
+            </div>
+
+            {{end}}
+
+
+            <hr style="margin-top:25px;">
+
+
+            <p>
+                <strong>TOTAL TO PAY</strong>
+            </p>
+
+            <h1 style="margin-bottom:10px;">
+                ₦{{.Total}}
+            </h1>
+
+
+            {{if gt .AmountPaid 0.0}}
+
+            <p>
+                <strong>ALREADY PAID:</strong>
+                ₦{{.AmountPaid}}
+            </p>
+
+            <p>
+                <strong>REMAINING BALANCE:</strong>
+                ₦{{.Balance}}
+            </p>
+
+            {{end}}
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- BANK DETAILS -->
+    <!-- ========================= -->
+
+    <div class="product-card" style="margin-top:25px;">
+
+        <div class="product-info">
+
+            <h2>BANK TRANSFER</h2>
+
+            <p>
+                Make your payment to the account below.
+            </p>
+
+
+            <p>
+                <strong>ACCOUNT NAME</strong>
+            </p>
+
+            <h3>
+                Ina Hadiza Isah
+            </h3>
+
+
+            <p>
+                <strong>ACCOUNT NUMBER</strong>
+            </p>
+
+            <h3 id="account-number">
+                8101228840
+            </h3>
+
+            <button
+                type="button"
+                onclick="copyAccount()"
+                class="order-button">
+
+                COPY ACCOUNT NUMBER
+
+            </button>
+
+
+            <p style="margin-top:25px;">
+                <strong>BANK</strong>
+            </p>
+
+            <h3>
+                OPay
+            </h3>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- PAYMENT FORM -->
+    <!-- ========================= -->
+
+    <div class="empty-shop" style="margin-top:25px;">
+
+        <h2>
+            PAYMENT DETAILS
+        </h2>
+
+        <form
+            action="/checkout"
+            method="POST"
+            onsubmit="return validatePayment()">
+
+            <input
+                type="hidden"
+                name="customer"
+                value="{{.CustomerID}}">
+
+            <input
+                type="hidden"
+                name="name"
+                value="{{.Name}}">
+
+            <input
+                type="hidden"
+                name="phone"
+                value="{{.Phone}}">
+
+            <input
+                type="hidden"
+                name="address"
+                value="{{.Address}}">
+
+            <input
+                type="hidden"
+                name="note"
+                value="{{.Note}}">
+
+            <input
+                type="hidden"
+                name="cart"
+                value="{{.Cart}}">
+
+
+            <label>
+                Payment Type
+            </label>
+
+            <select
+                id="payment-type"
+                name="payment_type"
+                onchange="setPaymentAmount()"
+                required
+                style="width:100%; padding:14px; margin:10px 0 20px;">
+
+                <option value="">
+                    Select payment type
+                </option>
+
+                <option value="full">
+                    Full Payment
+                </option>
+
+                <option value="part">
+                    Part Payment
+                </option>
+
+            </select>
+
+
+            <label>
+                Amount Paid
+            </label>
+
+            <input
+                type="number"
+                id="amount-paid"
+                name="amount_paid"
+                min="0"
+                step="0.01"
+                placeholder="Enter amount paid"
+                required
+                style="width:100%; padding:14px; margin:10px 0 20px;">
+
+
+            <label style="
+                display:flex;
+                align-items:center;
+                gap:10px;
+                margin:20px 0;
+                text-align:left;
+            ">
+
+                <input
+                    type="checkbox"
+                    id="payment-confirmed"
+                    name="payment_confirmed"
+                    value="yes"
+                    required
+                    style="width:20px; height:20px;">
+
+                I confirm that I have made this payment.
+
+            </label>
+
+
+            <button
+                type="submit"
+                class="order-button"
+                style="width:100%;">
+
+                CONTINUE TO RECEIPT
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+    <p>
+        © 2026 ASEBE FABRICS
+    </p>
+
+</footer>
+
+
+<script>
+
+const orderTotal =
+    Number("{{.Total}}");
+
+const amountAlreadyPaid =
+    Number("{{.AmountPaid}}");
+
+const remainingBalance =
+    Number("{{.Balance}}");
+
+
+function copyAccount() {
+
+    const account =
+        document.getElementById(
+            "account-number"
+        ).innerText.trim();
+
+    navigator.clipboard.writeText(account);
+
+    alert(
+        "Account number copied!"
+    );
+}
+
+
+function setPaymentAmount() {
+
+    const type =
+        document.getElementById(
+            "payment-type"
+        ).value;
+
+    const amount =
+        document.getElementById(
+            "amount-paid"
+        );
+
+
+    if (type === "full") {
+
+        amount.value =
+            remainingBalance;
+
+        amount.readOnly = true;
+
+    } else {
+
+        amount.value = "";
+
+        amount.readOnly = false;
+
+    }
+}
+
+
+function validatePayment() {
+
+    const amount =
+        Number(
+            document.getElementById(
+                "amount-paid"
+            ).value
+        );
+
+    const type =
+        document.getElementById(
+            "payment-type"
+        ).value;
+
+
+    if (!type) {
+
+        alert(
+            "Please select a payment type."
+        );
+
+        return false;
+    }
+
+
+    if (amount <= 0) {
+
+        alert(
+            "Please enter the amount you paid."
+        );
+
+        return false;
+    }
+
+
+    if (amount > remainingBalance) {
+
+        alert(
+            "Amount paid cannot be greater than the remaining balance of ₦"
+            + remainingBalance
+        );
+
+        return false;
+    }
+
+
+    if (
+        type === "full" &&
+        amount !== remainingBalance
+    ) {
+
+        alert(
+            "Full payment must equal the remaining balance."
+        );
+
+        return false;
+    }
+
+
+    return true;
+}
+
+</script>
+
+
+
+</body>
+
+</html>

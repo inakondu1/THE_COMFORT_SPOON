@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Checkout</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/cart">CART 🛒</a>
+        <a href="/payment">PAYMENT</a>
+        <a href="/fabric-request">REQUEST FABRIC 🧵</a>
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>CHECKOUT</h1>
+
+    <span>
+        Enter your details before making payment.
+    </span>
+
+</section>
+
+
+<section style="max-width:650px; margin:40px auto; padding:20px;">
+
+    <form id="checkout-form">
+
+        <div class="product-card">
+
+            <div class="product-info">
+
+                <h2>CUSTOMER DETAILS</h2>
+
+                <div class="form-group">
+
+                    <label for="customer-name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customer-name"
+                        value="{{.Name}}"
+                        placeholder="Enter your full name"
+                        readonly
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="customer-phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="customer-phone"
+                        value="{{.Phone}}"
+                        placeholder="08012345678"
+                        readonly
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="customer-address">
+                        Delivery Address
+                    </label>
+
+                    <textarea
+                        id="customer-address"
+                        placeholder="Enter your delivery address"
+                        required
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="order-summary"
+            class="order-summary">
+        </div>
+
+
+        <button
+            type="submit"
+            class="order-button"
+            style="margin-top:20px;">
+
+            CONTINUE TO PAYMENT 💳
+
+        </button>
+
+    </form>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+    <p>
+        © 2026 ASEBE FABRICS
+    </p>
+
+</footer>
+
+
+<script>
+
+const form =
+    document.getElementById("checkout-form");
+
+const summary =
+    document.getElementById("order-summary");
+
+
+let cart =
+    JSON.parse(
+        localStorage.getItem("asebeCart")
+    ) || [];
+
+
+/*
+   Load registered customer details.
+
+   Name and phone are filled automatically
+   when the customer has already registered.
+*/
+const savedCustomer =
+    JSON.parse(
+        localStorage.getItem("asebeCustomer")
+    ) || {};
+
+if (savedCustomer.name) {
+    document.getElementById("customer-name").value =
+        savedCustomer.name;
+}
+
+if (savedCustomer.phone) {
+    document.getElementById("customer-phone").value =
+        savedCustomer.phone;
+}
+
+
+if (cart.length === 0) {
+
+    summary.innerHTML = `
+
+        <div class="product-card">
+
+            <div class="product-info">
+
+                <h2>
+                    Your cart is empty.
+                </h2>
+
+                <a
+                    href="/shop"
+                    class="order-button"
+                    style="text-decoration:none; display:inline-block;">
+
+                    GO TO SHOP
+
+                </a>
+
+            </div>
+
+        </div>
+
+    `;
+
+    form.style.display = "none";
+
+} else {
+
+    let total = 0;
+
+    let html = `
+        <h2>ORDER SUMMARY</h2>
+    `;
+
+
+    cart.forEach(function(item) {
+
+        const itemTotal =
+            item.price * item.quantity;
+
+        total += itemTotal;
+
+
+        html += `
+
+            <div class="order-item">
+
+                <div>
+
+                    <strong>
+                        ${item.name}
+                    </strong>
+
+                    <p>
+                        ₦${item.price.toLocaleString()}
+                        × ${item.quantity}
+                    </p>
+
+                </div>
+
+                <strong>
+                    ₦${itemTotal.toLocaleString()}
+                </strong>
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `
+
+        <div class="order-total">
+
+            <span>
+                TOTAL
+            </span>
+
+            <strong>
+                ₦${total.toLocaleString()}
+            </strong>
+
+        </div>
+
+    `;
+
+
+    summary.innerHTML = html;
+}
+
+
+form.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        if (cart.length === 0) {
+
+            alert("Your cart is empty.");
+
+            return;
+        }
+
+
+        const name =
+            document.getElementById(
+                "customer-name"
+            ).value.trim();
+
+
+        const phone =
+            document.getElementById(
+                "customer-phone"
+            ).value.trim();
+
+
+        const address =
+            document.getElementById(
+                "customer-address"
+            ).value.trim();
+
+
+        if (!name || !phone || !address) {
+
+            alert(
+                "Please complete all customer details."
+            );
+
+            return;
+        }
+
+
+        /*
+           Save customer details temporarily.
+
+           Payment will be the next step.
+        */
+
+        const customerDetails = {
+
+            name: name,
+
+            phone: phone,
+
+            address: address
+
+        };
+
+
+        localStorage.setItem(
+            "asebeCustomer",
+            JSON.stringify(customerDetails)
+        );
+
+
+        /*
+           Continue to payment.
+
+           Send the customer details and cart
+           to the payment page.
+        */
+
+        const customerID =
+            "{{.CustomerID}}";
+
+        const note = "";
+
+        const cartJSON =
+            JSON.stringify(cart);
+
+        const paymentURL =
+            "/payment?" +
+            new URLSearchParams({
+                customer: customerID,
+                name: name,
+                phone: phone,
+                address: address,
+                note: note,
+                cart: cartJSON
+            }).toString();
+
+        window.location.href =
+            paymentURL;
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

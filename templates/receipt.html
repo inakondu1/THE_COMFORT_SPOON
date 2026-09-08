@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Receipt</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+</head>
+
+<body>
+
+<script>
+/*
+   The order has reached the receipt page.
+   This means checkout/payment processing is complete,
+   so the previous shopping cart can now be cleared.
+*/
+localStorage.removeItem("asebeCart");
+</script>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/customer">MY ACCOUNT</a>
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>{{.ReceiptTitle}}</h1>
+
+    <span>
+        Thank you for shopping with us.
+    </span>
+
+</section>
+
+
+<section style="
+    max-width:800px;
+    margin:40px auto;
+    padding:20px;
+">
+
+    <div class="product-card">
+
+        <div class="product-info">
+
+            <h2>
+                ASEBE FABRICS
+            </h2>
+
+            <p>
+                <strong>Order Number:</strong>
+                #{{.OrderID}}
+            </p>
+
+            <p>
+                <strong>Date:</strong>
+                {{.Date}}
+            </p>
+
+            <hr>
+
+
+            <h3>
+                CUSTOMER
+            </h3>
+
+            <p>
+                <strong>Name:</strong>
+                {{.CustomerName}}
+            </p>
+
+            <p>
+                <strong>Phone:</strong>
+                {{.Phone}}
+            </p>
+
+
+            <hr>
+
+            {{if .IsOutstandingPayment}}
+
+            <h3>
+                OUTSTANDING PAYMENT DETAILS
+            </h3>
+
+            <div style="
+                padding:20px;
+                background:#f5f5f5;
+                border-radius:10px;
+            ">
+
+                <p>
+                    <strong>
+                        Payment For Order:
+                    </strong>
+
+                    #{{.OrderID}}
+                </p>
+
+                <p>
+                    <strong>
+                        Previous Outstanding Balance:
+                    </strong>
+
+                    ₦{{.PaymentPreviousBalance}}
+                </p>
+
+                <p>
+                    <strong>
+                        Amount Paid Now:
+                    </strong>
+
+                    ₦{{.PaymentAmount}}
+                </p>
+
+                <p>
+                    <strong>
+                        Balance Remaining:
+                    </strong>
+
+                    ₦{{.PaymentBalanceRemaining}}
+                </p>
+
+                <p>
+                    <strong>
+                        Payment Status:
+                    </strong>
+
+                    {{.PaymentStatus}}
+                </p>
+
+                <p>
+                    <strong>
+                        Payment Date:
+                    </strong>
+
+                    {{.PaymentDate}}
+                </p>
+
+            </div>
+
+            {{else}}
+
+            <h3>
+                ORDER ITEMS
+            </h3>
+
+            {{range .Items}}
+
+            <div style="
+                padding:15px 0;
+                border-bottom:1px solid #ddd;
+            ">
+
+                <strong>
+                    {{.ProductName}}
+                </strong>
+
+                <p>
+                    ₦{{.Price}} × {{.Quantity}}
+                </p>
+
+                <strong>
+                    ₦{{.Subtotal}}
+                </strong>
+
+            </div>
+
+            {{end}}
+
+            <br>
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                font-size:22px;
+            ">
+
+                <strong>
+                    TOTAL
+                </strong>
+
+                <strong>
+                    ₦{{.Total}}
+                </strong>
+
+            </div>
+
+            {{end}}
+
+            <br>
+
+            <br>
+
+
+            <p style="
+                text-align:center;
+                font-size:18px;
+            ">
+
+                Thank you for choosing
+                <strong>ASEBE FABRICS</strong> ❤️
+
+            </p>
+
+
+            <div style="
+                text-align:center;
+                margin-top:20px;
+            ">
+
+                <button
+                    onclick="window.print()"
+                    class="order-button">
+
+                    PRINT RECEIPT 🖨️
+
+                </button>
+
+                <button
+                    onclick="forwardToWhatsApp()"
+                    class="order-button"
+                    style="margin-left:10px;">
+
+                    FORWARD TO WHATSAPP 📱
+
+                </button>
+
+            </div>
+
+            <div
+                id="whatsapp-return"
+                style="
+                    display:none;
+                    text-align:center;
+                    margin-top:30px;
+                    padding:25px;
+                    border-radius:12px;
+                    background:#f5f5f5;
+                "
+            >
+
+                <h2>✅ Receipt Ready for WhatsApp</h2>
+
+                <p>
+                    After sending the receipt on WhatsApp,
+                    you can continue shopping or log out.
+                </p>
+
+                <a
+                    href="/shop"
+                    class="order-button"
+                    style="
+                        text-decoration:none;
+                        display:inline-block;
+                        margin:8px;
+                    "
+                >
+                    🛍️ CONTINUE SHOPPING
+                </a>
+
+                <a
+                    href="/logout"
+                    class="order-button"
+                    style="
+                        text-decoration:none;
+                        display:inline-block;
+                        margin:8px;
+                    "
+                >
+                    🚪 LOG OUT
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+    <p>
+        © 2026 ASEBE FABRICS
+    </p>
+
+</footer>
+
+
+<script>
+
+function forwardToWhatsApp() {
+
+    const phone = "{{.Phone}}";
+
+    const message =
+        "Hello ASEBE FABRICS! 👋\n\n" +
+        "*ORDER RECEIPT*\n\n" +
+        "*Order Number:* #{{.OrderID}}\n" +
+        "*Customer:* {{.CustomerName}}\n" +
+        "*Phone:* {{.Phone}}\n\n" +
+        "*ORDER ITEMS*\n" +
+        "{{range .Items}}- {{.ProductName}} × {{.Quantity}} = ₦{{.Subtotal}}\n{{end}}" +
+        "\n*TOTAL:* ₦{{.Total}}\n" +
+        "*AMOUNT PAID:* ₦{{.AmountPaid}}\n" +
+        "*BALANCE REMAINING:* ₦{{.Balance}}\n" +
+        "*PAYMENT STATUS:* {{.PaymentStatus}}\n\n" +
+        "Please confirm my order. Thank you.";
+
+    const whatsappNumber = "2348101228840";
+
+    const whatsappURL =
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        encodeURIComponent(message);
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+    document.getElementById("whatsapp-return").style.display = "block";
+}
+
+</script>
+
+</body>
+
+</html>

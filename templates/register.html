@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Register</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/cart">CART 🛒</a>
+        <a href="/order">ORDER</a>
+        <a href="/login">LOGIN</a>
+    </nav>
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>CREATE ACCOUNT</h1>
+
+    <span>
+        Register quickly to keep track of your orders.
+    </span>
+
+</section>
+
+
+<section class="add-fabric-page">
+
+    <div class="add-fabric-card">
+
+        {{if .Message}}
+        <div class="outstanding-box" style="margin-bottom:20px; text-align:center;">
+            {{.Message}}
+        </div>
+        {{end}}
+
+        <div class="form-heading">
+
+            <h1>Customer Registration</h1>
+
+            <p>
+                We only need your name and phone number.
+            </p>
+
+        </div>
+
+
+        <form
+            class="fabric-form"
+            method="POST"
+            action="/register">
+
+
+            <div class="form-group">
+
+                <label for="name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="phone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="08012345678"
+                    required>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <a
+                    href="/"
+                    class="cancel-button">
+
+                    CANCEL
+
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="save-button">
+
+                    CREATE ACCOUNT
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+    <p>
+        Your privacy matters to us.
+    </p>
+
+</footer>
+
+</body>
+
+</html>

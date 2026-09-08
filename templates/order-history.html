@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Order History</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+
+    <style>
+
+        .history-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .history-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .history-section {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 10px;
+            background: #f7f7f7;
+        }
+
+        .payment-section {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #eeeeee;
+        }
+
+        .payment-card {
+            background: #ffffff;
+            padding: 18px;
+            margin-top: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #222;
+        }
+
+        .history-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .history-row:last-child {
+            border-bottom: none;
+        }
+
+        .history-label {
+            font-weight: 600;
+        }
+
+        .history-value {
+            font-weight: 700;
+        }
+
+        .outstanding-box {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 10px;
+            background: #fff3cd;
+        }
+
+        .total-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #eeeeee;
+        }
+
+        .balance-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8d7da;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        .order-button {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        .payment-button {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+
+            .history-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/cart">CART 🛒</a>
+        <a href="/customer">MY ACCOUNT</a>
+
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>MY ORDER HISTORY</h1>
+
+    <span>
+        Your orders, payments and outstanding balances.
+    </span>
+
+</section>
+
+
+<section class="history-container">
+
+    {{if .Orders}}
+
+        {{range .Orders}}
+
+        <div class="history-card">
+
+            {{$order := .}}
+
+            <h2>
+                ORDER #{{.ID}}
+            </h2>
+
+            <p>
+                <strong>Date:</strong>
+                {{.DisplayDate}}
+            </p>
+
+            <hr>
+
+
+            {{if .Payments}}
+
+            <div class="payment-section">
+
+                <h3>PAYMENT TRANSACTIONS</h3>
+
+                {{range .Payments}}
+
+                <div class="payment-card">
+
+                    <h4>
+                        {{.PaymentType}}
+                    </h4>
+
+                    <p>
+                        <strong>Date:</strong>
+                        {{.DisplayDate}}
+                    </p>
+
+                    <div class="history-row">
+
+                        <span class="history-label">
+                            Previous Balance:
+                        </span>
+
+                        <span class="history-value">
+                            ₦{{.PreviousBalance}}
+                        </span>
+
+                    </div>
+
+                    <div class="history-row">
+
+                        <span class="history-label">
+                            Amount Paid:
+                        </span>
+
+                        <span class="history-value">
+                            ₦{{.AmountPaid}}
+                        </span>
+
+                    </div>
+
+                    <div class="history-row">
+
+                        <span class="history-label">
+                            Balance Remaining:
+                        </span>
+
+                        <span class="history-value">
+                            ₦{{.BalanceRemaining}}
+                        </span>
+
+                    </div>
+
+                    <p>
+
+                        <strong>Status:</strong>
+                        {{.PaymentStatus}}
+
+                    </p>
+
+                    <a
+                        href="/receipt?order={{$order.ID}}&payment=outstanding"
+                        class="order-button payment-button">
+
+                        VIEW PAYMENT RECEIPT
+
+                    </a>
+
+                </div>
+
+                {{end}}
+
+            </div>
+
+            {{end}}
+
+
+            <div class="history-section">
+
+                <h3>ORDER SUMMARY</h3>
+
+                <div class="history-row">
+
+                    <span class="history-label">
+                        New Fabrics:
+                    </span>
+
+                    <span class="history-value">
+                        ₦{{.CurrentOrderTotal}}
+                    </span>
+
+                </div>
+
+
+                {{if gt .PreviousBalance 0.0}}
+
+                <div class="history-row">
+
+                    <span class="history-label">
+                        Previous Outstanding Balance:
+                    </span>
+
+                    <span class="history-value">
+                        ₦{{.PreviousBalance}}
+                    </span>
+
+                </div>
+
+                {{if .PreviousBalanceOrderID}}
+
+                <div class="history-row">
+
+                    <span class="history-label">
+                        Carried From Order:
+                    </span>
+
+                    <span class="history-value">
+                        #{{.PreviousBalanceOrderID}}
+                    </span>
+
+                </div>
+
+                <div class="outstanding-box">
+
+                    This outstanding amount was carried
+                    from the previous order into this order.
+
+                </div>
+
+                {{end}}
+
+                {{end}}
+
+            </div>
+
+
+            <div class="total-box">
+
+                <h3>TOTAL TO PAY</h3>
+
+                <div class="history-row">
+
+                    <span class="history-label">
+                        Order Total:
+                    </span>
+
+                    <span class="history-value">
+                        ₦{{.Total}}
+                    </span>
+
+                </div>
+
+                <div class="history-row">
+
+                    <span class="history-label">
+                        Already Paid:
+                    </span>
+
+                    <span class="history-value">
+                        ₦{{.AmountPaid}}
+                    </span>
+
+                </div>
+
+                <div class="history-row">
+
+                    <span class="history-label">
+                        Remaining Balance:
+                    </span>
+
+                    <span class="history-value">
+                        ₦{{.Balance}}
+                    </span>
+
+                </div>
+
+                <p>
+
+                    <strong>Payment Status:</strong>
+
+                    <span class="status">
+                        {{.PaymentStatus}}
+                    </span>
+
+                </p>
+
+            </div>
+
+
+
+
+
+            <a
+                href="/receipt?order={{.ID}}"
+                class="order-button">
+
+                VIEW ORDER RECEIPT
+
+            </a>
+
+        </div>
+
+        {{end}}
+
+    {{else}}
+
+        <div class="history-card">
+
+            <h2>NO ORDERS YET</h2>
+
+            <p>
+                You have not placed any orders yet.
+            </p>
+
+            <a
+                href="/shop"
+                class="order-button">
+
+                START SHOPPING
+
+            </a>
+
+        </div>
+
+    {{end}}
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+    <p>
+        © 2026 ASEBE FABRICS
+    </p>
+
+</footer>
+
+</body>
+
+</html>

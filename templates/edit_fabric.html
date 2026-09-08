@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Edit Fabric</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/admin">ADMIN</a>
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>EDIT FABRIC</h1>
+
+    <span>
+        Update the fabric information below.
+    </span>
+
+</section>
+
+
+<section class="form-section">
+
+    <a href="/admin"
+       class="back-button">
+
+        ← BACK TO ADMIN DASHBOARD
+
+    </a>
+
+
+    <form
+        method="POST"
+        action="/admin/edit-fabric"
+        enctype="multipart/form-data"
+        class="fabric-form"
+    >
+
+        <input
+            type="hidden"
+            name="id"
+            value="{{.ID}}"
+        >
+
+
+        <label for="name">
+            Fabric Name
+        </label>
+
+        <input
+            type="text"
+            id="name"
+            name="name"
+            value="{{.Name}}"
+            required
+        >
+
+
+        <label for="description">
+            Description
+        </label>
+
+        <textarea
+            id="description"
+            name="description"
+            rows="5"
+            required
+        >{{.Description}}</textarea>
+
+
+        <label for="price">
+            Price (₦)
+        </label>
+
+        <input
+            type="number"
+            id="price"
+            name="price"
+            value="{{.Price}}"
+            min="0"
+            step="0.01"
+            required
+        >
+
+
+        <label for="quantity">
+            Quantity / Stock
+        </label>
+
+        <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            value="{{.Quantity}}"
+            min="0"
+            required
+        >
+
+
+        <label for="image">
+            Change Fabric Image
+        </label>
+
+
+        {{if .Image}}
+
+        <div class="current-image">
+
+            <p>Current Image</p>
+
+            <img
+                src="{{.Image}}"
+                alt="{{.Name}}"
+            >
+
+        </div>
+
+        {{end}}
+
+
+        <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+        >
+
+
+        <div class="edit-form-actions">
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                SAVE CHANGES
+            </button>
+
+            <a
+                href="/admin"
+                class="cancel-button"
+            >
+                CANCEL
+            </a>
+
+        </div>
+
+    </form>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+</footer>
+
+</body>
+
+</html>

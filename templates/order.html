@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | Place Order</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+
+</head>
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+
+        <a href="/">HOME</a>
+
+        <a href="/shop">SHOP</a>
+
+        <a href="/cart">CART 🛒</a>
+
+        <a href="/order">ORDER</a>
+
+        <a href="/payment">PAYMENT</a>
+        <a href="/fabric-request">REQUEST FABRIC 🧵</a>
+
+    </nav>
+
+</header>
+
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>PLACE YOUR ORDER</h1>
+
+    <span>
+        Complete your details and review your fabrics.
+    </span>
+
+</section>
+
+
+
+<section class="add-fabric-page">
+
+    <div class="add-fabric-card">
+
+
+        <!-- CUSTOMER INFORMATION -->
+
+        <div class="form-heading">
+
+            <div class="form-icon">
+                🛍️
+            </div>
+
+            <h1>Customer Information</h1>
+
+            <p>
+                Tell us where to deliver your fabrics.
+            </p>
+
+        </div>
+
+
+
+        <form
+            class="fabric-form"
+            id="order-form"
+            action="/order"
+            method="POST">
+
+
+            <div class="form-group">
+
+                <label for="name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="{{.Name}}"
+                    readonly
+                    placeholder="Enter your full name"
+                    required>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="phone">
+                    WhatsApp Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value="{{.Phone}}"
+                    readonly
+                    placeholder="08012345678"
+                    required>
+
+            <input
+                    type="hidden"
+                    id="cart-data"
+                    name="cart">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="address">
+                    Delivery Address
+                </label>
+
+                <textarea
+                    id="address"
+                    name="address"
+                    rows="4"
+                    placeholder="Enter your delivery address"
+                    required></textarea>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="note">
+                    Additional Note
+                </label>
+
+                <textarea
+                    id="note"
+                    name="note"
+                    rows="3"
+                    placeholder="Any additional information?"></textarea>
+
+            </div>
+
+
+
+            <!-- ORDER SUMMARY -->
+
+            <div class="order-summary">
+
+                <h2>
+                    🛒 Your Order
+                </h2>
+
+                <div id="order-items">
+
+                </div>
+
+                <div class="order-total">
+
+                    <span>
+                        TOTAL
+                    </span>
+
+                    <strong id="order-total">
+                        ₦0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="form-actions">
+
+                <a
+                    href="/cart"
+                    class="cancel-button">
+
+                    BACK TO CART
+
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="save-button">
+
+                    PLACE ORDER → PAYMENT
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+    <p>
+        © 2026 ASEBE FABRICS
+    </p>
+
+</footer>
+
+
+
+<script>
+
+
+/* =========================
+   GET CART
+========================= */
+
+function getCart() {
+
+    return JSON.parse(
+        localStorage.getItem("asebeCart")
+    ) || [];
+
+}
+
+
+
+/* =========================
+   DISPLAY ORDER
+========================= */
+
+function displayOrder() {
+
+    const cart = getCart();
+
+    const container =
+        document.getElementById("order-items");
+
+    const totalElement =
+        document.getElementById("order-total");
+
+
+    if (cart.length === 0) {
+
+        container.innerHTML = `
+
+            <p style="
+                text-align:center;
+                color:#888;
+                padding:20px;
+            ">
+
+                Your cart is empty.
+
+                <br><br>
+
+                <a href="/shop"
+                   style="color:#c62828;">
+
+                    Go to Shop
+
+                </a>
+
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    let total = 0;
+
+    let html = "";
+
+
+    cart.forEach(function(item) {
+
+        const subtotal =
+            item.price * item.quantity;
+
+
+        total += subtotal;
+
+
+        html += `
+
+            <div class="order-item">
+
+                <div>
+
+                    <strong>
+                        ${item.name}
+                    </strong>
+
+                    <p>
+                        ₦${item.price.toLocaleString()}
+                        ×
+                        ${item.quantity}
+                    </p>
+
+                </div>
+
+
+                <strong>
+
+                    ₦${subtotal.toLocaleString()}
+
+                </strong>
+
+            </div>
+
+        `;
+
+    });
+
+
+    container.innerHTML = html;
+
+
+    totalElement.innerText =
+        "₦" + total.toLocaleString();
+
+}
+
+
+
+/* =========================
+   SUBMIT ORDER
+========================= */
+
+document
+    .getElementById("order-form")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            const cart = getCart();
+
+            if (cart.length === 0) {
+
+                event.preventDefault();
+
+                alert(
+                    "Your cart is empty. Please select a fabric first."
+                );
+
+                window.location.href = "/shop";
+
+                return;
+            }
+
+            /*
+             * Put the cart into the hidden form field.
+             * The form will then POST directly to /order.
+             * Go will create the order and send the customer
+             * to the payment page.
+             */
+
+            document.getElementById("cart-data").value =
+                JSON.stringify(cart);
+        }
+    );
+
+
+/* =========================
+   LOAD ORDER
+========================= */
+
+displayOrder();
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ASEBE FABRICS | My Dashboard</title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/shop">SHOP</a>
+        <a href="/cart">CART 🛒</a>
+        <a href="/order">ORDER</a>
+        <a href="/payment">PAYMENT</a>
+        <a href="/dashboard">MY ACCOUNT</a>
+        <a href="/logout">LOGOUT</a>
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>MY DASHBOARD</h1>
+
+    <span>
+        Welcome back, {{.FullName}}
+    </span>
+
+</section>
+
+
+<section class="admin-page">
+
+    <div class="admin-container">
+
+        <!-- CUSTOMER INFORMATION -->
+
+        <div class="admin-card">
+
+            <div class="admin-icon">
+                👤
+            </div>
+
+            <h2>
+                {{.FullName}}
+            </h2>
+
+            <p>
+                Phone: {{.Phone}}
+            </p>
+
+            <p>
+                Address: {{.Address}}
+            </p>
+
+        </div>
+
+
+        <!-- ORDER HISTORY -->
+
+        <div class="admin-heading">
+
+            <p>YOUR ACCOUNT</p>
+
+            <h1>ORDER HISTORY</h1>
+
+            <span>
+                View your orders, payments and balances.
+            </span>
+
+        </div>
+
+
+        <div class="empty-shop">
+
+            <h2>
+                No orders yet 🛍️
+            </h2>
+
+            <p>
+                Your orders will appear here after you make a purchase.
+            </p>
+
+            <br>
+
+            <a
+                href="/shop"
+                class="order-button"
+                style="text-decoration:none; display:inline-block;">
+
+                START SHOPPING
+
+            </a>
+
+        </div>
+
+
+        <!-- CUSTOMER SERVICE -->
+
+        <div class="admin-heading"
+             style="margin-top:50px;">
+
+            <p>NEED HELP?</p>
+
+            <h1>CUSTOMER SERVICE</h1>
+
+            <span>
+                We're here to help with your orders.
+            </span>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <div class="admin-icon">
+                💬
+            </div>
+
+            <h2>
+                Chat With Us
+            </h2>
+
+            <p>
+                Contact ASEBE FABRICS customer service
+                if you have questions about your order.
+            </p>
+
+            <br>
+
+            <a
+                href="/chat"
+                class="order-button"
+                style="text-decoration:none;">
+
+                OPEN CHAT
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ASEBE <span>FABRICS</span>
+    </div>
+
+    <p>
+        Quality Fabrics • Beautiful Designs • Great Prices
+    </p>
+
+    <p>
+        Thank you for choosing ASEBE FABRICS ❤️
+    </p>
+
+</footer>
+
+</body>
+
+</html>

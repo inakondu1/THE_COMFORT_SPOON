@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+```
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>ASEBE FABRICS | Login</title>
+
+<link rel="stylesheet"
+      href="/static/css/style.css">
+```
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+```
+<div class="logo">
+    <span>ASEBE</span> FABRICS
+</div>
+
+<nav>
+
+    <a href="/">HOME</a>
+    <a href="/shop">SHOP</a>
+    <a href="/cart">CART 🛒</a>
+    <a href="/order">ORDER</a>
+    <a href="/payment">PAYMENT</a>
+    <a href="/register">REGISTER</a>
+
+</nav>
+```
+
+</header>
+
+<section class="shop-header">
+
+```
+<p>ASEBE FABRICS</p>
+
+<h1>CUSTOMER LOGIN</h1>
+
+<span>
+    Login to view your orders and payment history.
+</span>
+```
+
+</section>
+
+<section class="add-fabric-page">
+
+```
+<div class="add-fabric-card">
+
+        {{if .Message}}
+        <div class="outstanding-box" style="margin-bottom:20px; text-align:center;">
+            {{.Message}}
+        </div>
+        {{end}}
+
+
+
+    <div class="form-heading">
+
+        <h1>Welcome Back</h1>
+
+        <p>
+            Enter your phone number to continue.
+        </p>
+
+    </div>
+
+
+    <form
+        class="fabric-form"
+        method="POST"
+        action="/login">
+
+
+        <div class="form-group">
+
+            <label for="phone">
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="08012345678"
+                required>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <a
+                href="/register"
+                class="cancel-button">
+
+                CREATE ACCOUNT
+
+            </a>
+
+
+            <button
+                type="submit"
+                class="save-button">
+
+                LOGIN
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</section>
+
+<footer>
+
+```
+<div class="footer-logo">
+    ASEBE <span>FABRICS</span>
+</div>
+
+<p>
+    Quality Fabrics • Beautiful Designs • Great Prices
+</p>
+```
+
+</footer>
+
+</body>
+
+</html>

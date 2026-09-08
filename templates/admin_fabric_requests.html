@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ASEBE FABRICS | Fabric Requests</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>ASEBE</span> FABRICS
+    </div>
+
+    <nav>
+        <a href="/admin">ADMIN HOME</a>
+        <a href="/logout">LOGOUT</a>
+    </nav>
+
+</header>
+
+
+<section class="shop-header">
+
+    <p>ASEBE FABRICS</p>
+
+    <h1>🧵 CUSTOMER FABRIC REQUESTS</h1>
+
+</section>
+
+
+<section style="max-width:1000px;margin:40px auto;padding:20px;">
+
+
+{{if .}}
+
+    {{range .}}
+
+    <div class="product-card">
+
+        <div class="product-info">
+
+            <h2>
+                Request #{{.ID}}
+            </h2>
+
+            <p>
+                <strong>Customer:</strong>
+                {{.CustomerName}}
+            </p>
+
+            <p>
+                <strong>Phone:</strong>
+                {{.Phone}}
+            </p>
+
+            <p>
+                <strong>Description:</strong>
+                {{.Description}}
+            </p>
+
+            <p>
+                <strong>Quantity:</strong>
+                {{.Quantity}}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{.Status}}
+            </p>
+
+            <p>
+                <strong>Date:</strong>
+                {{.Date}}
+            </p>
+
+
+            {{if .Image}}
+
+            <img
+              src="{{.Image}}"
+              style="max-width:250px;border-radius:10px;"
+            >
+
+            {{end}}
+
+            {{if eq .Status "PENDING"}}
+            <form method="POST" action="/admin/fabric-request-available" style="margin-top:20px;">
+                <input type="hidden" name="request_id" value="{{.ID}}">
+                <button type="submit" style="background:#b30000;color:white;padding:12px 20px;border:none;border-radius:8px;cursor:pointer;">
+                    🧵 MARK FABRIC AS AVAILABLE
+                </button>
+            </form>
+            {{else if eq .Status "AVAILABLE"}}
+            <p style="color:green;font-weight:bold;margin-top:20px;">✅ FABRIC AVAILABLE</p>
+            <a href="{{.WhatsAppURL}}" target="_blank" style="display:inline-block;margin-top:15px;background:#25D366;color:white;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;">📱 NOTIFY CUSTOMER ON WHATSAPP</a>
+            {{end}}
+
+        </div>
+
+    </div>
+
+    {{end}}
+
+
+{{else}}
+
+<h2>
+    No fabric requests yet.
+</h2>
+
+{{end}}
+
+
+</section>
+
+
+</body>
+
+</html>
