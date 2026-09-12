@@ -7,7 +7,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>ASEBE FABRICS | Checkout</title>
+    <title>THE COMFORT SPOON | Checkout</title>
 
     <link rel="stylesheet"
           href="/static/css/style.css">
@@ -18,7 +18,7 @@
 <header class="navbar">
 
     <div class="logo">
-        <span>ASEBE</span> FABRICS
+        <span>THE COMFORT SPOON</span>
     </div>
 
     <nav>
@@ -34,7 +34,7 @@
 
 <section class="shop-header">
 
-    <p>ASEBE FABRICS</p>
+    <p>THE COMFORT SPOON</p>
 
     <h1>CHECKOUT</h1>
 
@@ -133,15 +133,15 @@
 <footer>
 
     <div class="footer-logo">
-        ASEBE <span>FABRICS</span>
+        THE COMFORT SPOON
     </div>
 
     <p>
-        Quality Fabrics • Beautiful Designs • Great Prices
+        Delicious Food • Great Service • Memorable Experiences
     </p>
 
     <p>
-        © 2026 ASEBE FABRICS
+        © 2026 THE COMFORT SPOON
     </p>
 
 </footer>
@@ -158,7 +158,7 @@ const summary =
 
 let cart =
     JSON.parse(
-        localStorage.getItem("asebeCart")
+        localStorage.getItem("comfortSpoonCart")
     ) || [];
 
 
@@ -170,7 +170,7 @@ let cart =
 */
 const savedCustomer =
     JSON.parse(
-        localStorage.getItem("asebeCustomer")
+        localStorage.getItem("comfortSpoonCustomer")
     ) || {};
 
 if (savedCustomer.name) {
@@ -340,7 +340,7 @@ form.addEventListener(
 
 
         localStorage.setItem(
-            "asebeCustomer",
+            "comfortSpoonCustomer",
             JSON.stringify(customerDetails)
         );
 

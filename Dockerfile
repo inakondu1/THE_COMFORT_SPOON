@@ -12,6 +12,6 @@ COPY . .
 
 ENV CGO_ENABLED=1
 
-RUN go build -o asebe_fabricks .
+RUN go build -o comfort_spoon .
 
-CMD ["./asebe_fabricks"]
+CMD ["./comfort_spoon"]

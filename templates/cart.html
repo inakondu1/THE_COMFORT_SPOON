@@ -81,7 +81,7 @@
 function getCart() {
 
     return JSON.parse(
-        localStorage.getItem("asebeCart")
+        localStorage.getItem("comfortSpoonCart")
     ) || [];
 
 }
@@ -90,7 +90,7 @@ function getCart() {
 function saveCart(cart) {
 
     localStorage.setItem(
-        "asebeCart",
+        "comfortSpoonCart",
         JSON.stringify(cart)
     );
 

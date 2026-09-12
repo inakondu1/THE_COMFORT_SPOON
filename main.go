@@ -52,7 +52,7 @@ func formatNigeriaDate(value string) string {
 func setCustomerSession(w http.ResponseWriter, customerID int) {
 
 	http.SetCookie(w, &http.Cookie{
-		Name:     "asebe_customer",
+		Name:     "comfort_spoon_customer",
 		Value:    strconv.Itoa(customerID),
 		Path:     "/",
 		HttpOnly: true,
@@ -62,7 +62,7 @@ func setCustomerSession(w http.ResponseWriter, customerID int) {
 
 func getCustomerSession(r *http.Request) (int, bool) {
 
-	cookie, err := r.Cookie("asebe_customer")
+	cookie, err := r.Cookie("comfort_spoon_customer")
 
 	if err != nil {
 		return 0, false
@@ -674,7 +674,7 @@ func flutterwavePayHandler(w http.ResponseWriter, r *http.Request) {
 	total := currentOrderTotal + previousBalance
 
 	transactionReference := fmt.Sprintf(
-		"ASEBE-%d-%d",
+		"TCS-%d-%d",
 		time.Now().UnixNano(),
 		customerID,
 	)
@@ -739,13 +739,13 @@ func flutterwavePayHandler(w http.ResponseWriter, r *http.Request) {
 		"currency":     "NGN",
 		"redirect_url": callbackURL,
 		"customer": map[string]string{
-			"email":       "customer@asebefabrics.com",
+			"email":       "customer@example.com",
 			"name":        name,
 			"phonenumber": phone,
 		},
 		"customizations": map[string]string{
 			"title":       "The Comfort Spoon",
-			"description": "Fabric order payment",
+			"description": "Restaurant order payment",
 		},
 		"meta": map[string]interface{}{
 			"pending_payment_id": pendingID,
@@ -1713,7 +1713,7 @@ func adminPaymentReportsHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(
 			w,
 			r,
-			"/asebe-control/login",
+			"/comfort-spoon-control/login",
 			http.StatusSeeOther,
 		)
 		return
@@ -1854,7 +1854,7 @@ func adminConfirmPaymentHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(
 			w,
 			r,
-			"/asebe-control/login",
+			"/comfort-spoon-control/login",
 			http.StatusSeeOther,
 		)
 		return
@@ -2245,7 +2245,7 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(
 			w,
 			r,
-			"/asebe-control/login",
+			"/comfort-spoon-control/login",
 			http.StatusSeeOther,
 		)
 		return
@@ -2394,7 +2394,7 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 func setAdminSession(w http.ResponseWriter, adminID int) {
 
 	http.SetCookie(w, &http.Cookie{
-		Name:     "asebe_admin",
+		Name:     "comfort_spoon_admin",
 		Value:    strconv.Itoa(adminID),
 		Path:     "/",
 		HttpOnly: true,
@@ -2405,7 +2405,7 @@ func setAdminSession(w http.ResponseWriter, adminID int) {
 
 func getAdminSession(r *http.Request) (int, bool) {
 
-	cookie, err := r.Cookie("asebe_admin")
+	cookie, err := r.Cookie("comfort_spoon_admin")
 
 	if err != nil {
 		return 0, false
@@ -2480,7 +2480,7 @@ func adminLoginHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(
 			w,
 			r,
-			"/asebe-control/login?message=Please+enter+your+username+and+password.",
+			"/comfort-spoon-control/login?message=Please+enter+your+username+and+password.",
 			http.StatusSeeOther,
 		)
 		return
@@ -2502,7 +2502,7 @@ func adminLoginHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(
 			w,
 			r,
-			"/asebe-control/login?message=The+username+or+password+is+incorrect.+Please+try+again.",
+			"/comfort-spoon-control/login?message=The+username+or+password+is+incorrect.+Please+try+again.",
 			http.StatusSeeOther,
 		)
 		return
@@ -2543,7 +2543,7 @@ func adminLogoutHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.SetCookie(w, &http.Cookie{
-		Name:     "asebe_admin",
+		Name:     "comfort_spoon_admin",
 		Value:    "",
 		Path:     "/",
 		MaxAge:   -1,
@@ -2571,7 +2571,7 @@ func addFabricHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(
 			w,
 			r,
-			"/asebe-control/login",
+			"/comfort-spoon-control/login",
 			http.StatusSeeOther,
 		)
 		return
@@ -2747,7 +2747,7 @@ func deleteFabricHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(
 			w,
 			r,
-			"/asebe-control/login",
+			"/comfort-spoon-control/login",
 			http.StatusSeeOther,
 		)
 		return
@@ -2794,7 +2794,7 @@ func editFabricHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(
 			w,
 			r,
-			"/asebe-control/login",
+			"/comfort-spoon-control/login",
 			http.StatusSeeOther,
 		)
 		return
@@ -4210,7 +4210,7 @@ func logoutHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.SetCookie(w, &http.Cookie{
-		Name:     "asebe_customer",
+		Name:     "comfort_spoon_customer",
 		Value:    "",
 		Path:     "/",
 		MaxAge:   -1,
@@ -4804,7 +4804,7 @@ func checkPaymentTransactionsHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(
 			w,
 			r,
-			"/asebe-control/login",
+			"/comfort-spoon-control/login",
 			http.StatusSeeOther,
 		)
 		return
@@ -4987,7 +4987,7 @@ func main() {
 	http.HandleFunc("/admin/payment-reports", adminPaymentReportsHandler)
 	http.HandleFunc("/admin/confirm-payment", adminConfirmPaymentHandler)
 	http.HandleFunc("/admin/customers", adminCustomersHandler)
-	http.HandleFunc("/asebe-control/login", adminLoginHandler)
+	http.HandleFunc("/comfort-spoon-control/login", adminLoginHandler)
 	http.HandleFunc("/admin/logout", adminLogoutHandler)
 	http.HandleFunc("/admin", adminHandler)
 	http.HandleFunc("/admin/add-fabric", addFabricHandler)
@@ -5019,7 +5019,7 @@ func adminFabricRequestsHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(
 			w,
 			r,
-			"/asebe-control/login",
+			"/comfort-spoon-control/login",
 			http.StatusSeeOther,
 		)
 		return
@@ -5110,7 +5110,7 @@ func adminFabricRequestAvailableHandler(w http.ResponseWriter, r *http.Request) 
 
 	_, ok := getAdminSession(r)
 	if !ok {
-		http.Redirect(w, r, "/asebe-control/login", http.StatusSeeOther)
+		http.Redirect(w, r, "/comfort-spoon-control/login", http.StatusSeeOther)
 		return
 	}
 
@@ -5149,7 +5149,7 @@ func adminCustomersHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(
 			w,
 			r,
-			"/asebe-control/login",
+			"/comfort-spoon-control/login",
 			http.StatusSeeOther,
 		)
 		return
@@ -5235,7 +5235,7 @@ func adminOrdersHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(
 			w,
 			r,
-			"/asebe-control/login",
+			"/comfort-spoon-control/login",
 			http.StatusSeeOther,
 		)
 		return

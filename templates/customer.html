@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>ASEBE FABRICS | Customer Dashboard</title>
+    <title>THE COMFORT SPOON | Customer Dashboard</title>
 
     <link rel="stylesheet"
           href="/static/css/style.css">
@@ -25,7 +25,7 @@
     if (params.get("new_login") === "1") {
 
         // Start a completely fresh shopping session.
-        localStorage.removeItem("asebeCart");
+        localStorage.removeItem("comfortSpoonCart");
 
         // Remove the login flag from the address bar.
         params.delete("new_login");
@@ -43,7 +43,7 @@
 <header class="navbar">
 
     <div class="logo">
-        <span>ASEBE</span> FABRICS
+        <span>THE COMFORT SPOON</span>
     </div>
 
     <nav>
@@ -63,7 +63,7 @@
 
 <section class="shop-header">
 
-    <p>ASEBE FABRICS</p>
+    <p>THE COMFORT SPOON</p>
 
     <h1>MY CUSTOMER DASHBOARD</h1>
 
@@ -201,7 +201,7 @@
 
                 <p>
                     Tell us about your experience with
-                    ASEBE FABRICS and rate our service.
+                    THE COMFORT SPOON and rate our service.
                 </p>
 
                 <a
@@ -231,7 +231,7 @@
                 </p>
 
                 <a
-                    href="https://wa.me/2348101228840?text=Hello%20ASEBE%20FABRICS!%20I%20need%20help%20with%20my%20order."
+                    href="https://wa.me/2348101228840?text=Hello%20THE COMFORT SPOON!%20I%20need%20help%20with%20my%20order."
                     target="_blank"
                     class="order-button"
                     style="text-decoration:none; display:inline-block;">
@@ -253,7 +253,7 @@
 
                 <p>
                     Thank you for choosing
-                    ASEBE FABRICS.
+                    THE COMFORT SPOON.
                 </p>
 
                 <p>
@@ -274,15 +274,15 @@
 <footer>
 
     <div class="footer-logo">
-        ASEBE <span>FABRICS</span>
+        THE COMFORT SPOON
     </div>
 
     <p>
-        Quality Fabrics • Beautiful Designs • Great Prices
+        Delicious Food • Great Service • Memorable Experiences
     </p>
 
     <p>
-        © 2026 ASEBE FABRICS
+        © 2026 THE COMFORT SPOON
     </p>
 
 </footer>
@@ -291,7 +291,7 @@
 const params = new URLSearchParams(window.location.search);
 
 if (params.get("new_login") === "1") {
-    localStorage.removeItem("asebeCart");
+    localStorage.removeItem("comfortSpoonCart");
 
     params.delete("new_login");
 

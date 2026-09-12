@@ -13,7 +13,7 @@ func initDatabase() {
 	var err error
 
 	// Connect to database
-	db, err = sql.Open("sqlite3", "asebe_fabrics.db")
+	db, err = sql.Open("sqlite3", "restaurant_shop.db")
 
 	if err != nil {
 		log.Fatal("Could not open database:", err)
@@ -244,7 +244,7 @@ func initDatabase() {
 
 	log.Println("Customer active order tracking ready")
 
-	log.Println("ASEBE FABRICS database connected")
+	log.Println("THE COMFORT SPOON database connected")
 	log.Println("Products table ready")
 
 	// Create orders table

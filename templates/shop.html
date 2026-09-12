@@ -343,7 +343,7 @@ document
                 let cart =
                     JSON.parse(
                         localStorage.getItem(
-                            "asebeCart"
+                            "comfortSpoonCart"
                         )
                     ) || [];
 
@@ -384,7 +384,7 @@ document
 
 
                 localStorage.setItem(
-                    "asebeCart",
+                    "comfortSpoonCart",
                     JSON.stringify(cart)
                 );
 
@@ -406,7 +406,7 @@ function updateCartCount() {
     const cart =
         JSON.parse(
             localStorage.getItem(
-                "asebeCart"
+                "comfortSpoonCart"
             )
         ) || [];
 
