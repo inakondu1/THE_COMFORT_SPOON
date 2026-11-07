@@ -317,16 +317,12 @@
                                 {{.Name}}
                             </h3>
 
-                            <p>
-                                {{.Description}}
-                            </p>
-
                             <strong>
                                 ₦{{printf "%.0f" .Price}}
                             </strong>
 
                             <span>
-                                Stock: {{.Quantity}}
+                                {{if eq .Quantity 0}}Out of stock{{else if eq .Quantity 1}}1 plate left{{else}}{{.Quantity}} plates left{{end}}
                             </span>
 
                         </div>

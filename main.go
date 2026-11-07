@@ -268,36 +268,15 @@ func shopHandler(w http.ResponseWriter, r *http.Request) {
 
 	type ShopPage struct {
 		Products     []Product
-		NewArrivals  []Product
 		IsAdmin      bool
 		LoggedIn     bool
 		CustomerName string
 	}
-
-	var newArrivals []Product
-
-	arrivalRows, err := db.Query(`
-                SELECT id, name, description, price, quantity, image
-                FROM products
-                ORDER BY id DESC
-                LIMIT 4
-        `)
-	if err == nil {
-		defer arrivalRows.Close()
-		for arrivalRows.Next() {
-			var product Product
-			if arrivalRows.Scan(&product.ID, &product.Name, &product.Description, &product.Price, &product.Quantity, &product.Image) == nil {
-				newArrivals = append(newArrivals, product)
-			}
-		}
-	}
-
 	_, isAdmin := getAdminSession(r)
 
 	data := ShopPage{
-		Products:    products,
-		NewArrivals: newArrivals,
-		IsAdmin:     isAdmin,
+		Products: products,
+		IsAdmin:  isAdmin,
 	}
 
 	customerID, ok := getCustomerSession(r)
@@ -2597,7 +2576,7 @@ func addFabricHandler(w http.ResponseWriter, r *http.Request) {
 	description := r.FormValue("description")
 
 	if name == "" {
-		http.Error(w, "Fabric name is required", http.StatusBadRequest)
+		http.Error(w, "Product name is required", http.StatusBadRequest)
 		return
 	}
 
@@ -2655,7 +2634,7 @@ func addFabricHandler(w http.ResponseWriter, r *http.Request) {
 	if err != sql.ErrNoRows {
 		http.Error(
 			w,
-			"Could not check existing fabric: "+err.Error(),
+			"Could not check existing product: "+err.Error(),
 			http.StatusInternalServerError,
 		)
 		return
@@ -2728,7 +2707,7 @@ func addFabricHandler(w http.ResponseWriter, r *http.Request) {
 	)
 
 	if err != nil {
-		http.Error(w, "Could not save fabric: "+err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Could not save product: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 
@@ -2761,7 +2740,7 @@ func deleteFabricHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.FormValue("id")
 
 	if id == "" {
-		http.Error(w, "Fabric ID is required", http.StatusBadRequest)
+		http.Error(w, "Product ID is required", http.StatusBadRequest)
 		return
 	}
 
@@ -2771,7 +2750,7 @@ func deleteFabricHandler(w http.ResponseWriter, r *http.Request) {
 	)
 
 	if err != nil {
-		http.Error(w, "Could not delete fabric: "+err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Could not delete product: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 

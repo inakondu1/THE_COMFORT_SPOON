@@ -84,84 +84,7 @@
 </section>
 
 
-<section class="new-arrivals"
-         style="text-align:center;margin:40px 0;">
 
-    <h2>NEW ON THE MENU</h2>
-
-    <div class="products">
-
-        {{range .NewArrivals}}
-
-        <div class="product-card">
-
-            {{if .Image}}
-
-                <img
-                    src="{{.Image}}"
-                    alt="{{.Name}}">
-
-            {{else}}
-
-                <div class="no-image">
-
-                    <span>🍽️</span>
-
-                    <p>Meal Image</p>
-
-                </div>
-
-            {{end}}
-
-
-            <div class="product-info">
-
-                <h2>
-                    {{.Name}}
-                </h2>
-
-                <p>
-                    {{.Description}}
-                </p>
-
-                <div class="fabric-price">
-                    ₦{{printf "%.0f" .Price}}
-                </div>
-
-
-                {{if gt .Quantity 0}}
-
-                    <button
-                        class="order-button"
-                        data-id="{{.ID}}"
-                        data-name="{{.Name}}"
-                        data-price="{{.Price}}">
-
-                        ADD TO CART 🛒
-
-                    </button>
-
-                {{else}}
-
-                    <button
-                        class="order-button"
-                        disabled>
-
-                        CURRENTLY UNAVAILABLE
-
-                    </button>
-
-                {{end}}
-
-            </div>
-
-        </div>
-
-        {{end}}
-
-    </div>
-
-</section>
 
 
 <section class="fabric-search"
@@ -221,13 +144,10 @@
                     {{.Name}}
                 </h2>
 
-                <p>
-                    {{.Description}}
-                </p>
-
                 <div class="fabric-price">
                     ₦{{printf "%.0f" .Price}}
                 </div>
+                <p class="stock-count">{{if eq .Quantity 0}}Out of stock{{else if eq .Quantity 1}}1 plate left{{else}}{{.Quantity}} plates left{{end}}</p>
 
 
                 <div class="stock">
